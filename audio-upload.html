@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en" class="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
+<!DOCTYPE html><html lang="en" class="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
+<script id="tailwind-config">try{
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -110,10 +112,11 @@
 </div>
 <h2 class="font-headline-md text-headline-md text-primary mb-sm text-center">Drag &amp; drop your audio file here</h2>
 <p class="font-body-sm text-body-sm text-on-surface-variant mb-md text-center">Supports MP3, WAV, M4A up to 50MB</p>
-<button class="bg-surface border border-outline-variant text-primary font-label-md text-label-md px-lg py-sm rounded-lg hover:bg-surface-container-low transition-colors shadow-sm">
+<button id="browseFilesBtn" class="bg-surface border border-outline-variant text-primary font-label-md text-label-md px-lg py-sm rounded-lg hover:bg-surface-container-low transition-colors shadow-sm">
                     Browse Files
                 </button>
 <input type="file" id="fileInput" class="hidden" accept=".mp3,.wav,.m4a">
+<p id="uploadStatus" class="font-body-sm text-body-sm text-on-surface-variant mt-md text-center"></p>
 </div>
 </section>
 <section class="w-full bg-surface-container-lowest rounded-xl border border-outline-variant p-lg shadow-sm">
@@ -121,15 +124,10 @@
 <div class="flex flex-col gap-md">
 <div class="w-full h-24 bg-surface-container-low rounded-lg border border-outline-variant relative overflow-hidden flex items-center justify-center">
 <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: repeating-linear-gradient(90deg, transparent, transparent 2px, var(--tw-colors-secondary) 2px, var(--tw-colors-secondary) 4px);"></div>
-<span class="font-body-sm text-body-sm text-on-surface-variant relative z-10">Waiting for audio...</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant relative z-10" id="waveformStatus">Waiting for audio...</span>
 </div>
 <div class="flex items-center justify-between">
-<div class="flex items-center gap-sm">
-<button class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center hover:bg-opacity-90 transition-opacity opacity-50 cursor-not-allowed" disabled="">
-<span class="material-symbols-outlined" data-icon="play_arrow" data-weight="fill" style="font-variation-settings: 'FILL' 1;" data-original-icon="play_arrow">play_arrow</span>
-</button>
-<span class="font-label-md text-label-md text-on-surface-variant">00:00 / 00:00</span>
-</div>
+<div class="flex items-center gap-sm" id="audioPlayerWrap"></div>
 </div>
 </div>
 </section>
@@ -156,4 +154,66 @@
   <a href="export-modal.html" style="color:#b7c8dd;text-decoration:none;">Export</a>
   <a href="video-preview-modal.html" style="color:#b7c8dd;text-decoration:none;">Preview</a>
 </div>
+<script>
+(async () => {
+  const session = await requireAuth();
+  if (!session) return;
+  const userId = session.user.id;
+
+  const dropzone = document.getElementById("dropzone");
+  const fileInput = document.getElementById("fileInput");
+  const browseBtn = document.getElementById("browseFilesBtn");
+  const statusEl = document.getElementById("uploadStatus");
+  const waveformStatus = document.getElementById("waveformStatus");
+  const playerWrap = document.getElementById("audioPlayerWrap");
+
+  browseBtn.addEventListener("click", (e) => { e.stopPropagation(); fileInput.click(); });
+  dropzone.addEventListener("click", () => fileInput.click());
+  dropzone.addEventListener("dragover", (e) => { e.preventDefault(); dropzone.classList.add("border-secondary"); });
+  dropzone.addEventListener("dragleave", () => dropzone.classList.remove("border-secondary"));
+  dropzone.addEventListener("drop", (e) => {
+    e.preventDefault();
+    dropzone.classList.remove("border-secondary");
+    if (e.dataTransfer.files[0]) {
+      fileInput.files = e.dataTransfer.files;
+      handleUpload(e.dataTransfer.files[0]);
+    }
+  });
+  fileInput.addEventListener("change", () => {
+    if (fileInput.files[0]) handleUpload(fileInput.files[0]);
+  });
+
+  async function handleUpload(file) {
+    statusEl.textContent = "Uploading " + file.name + "...";
+    waveformStatus.textContent = "Uploading...";
+
+    const path = `${userId}/${Date.now()}-${file.name}`;
+    const { error: uploadError } = await supabase.storage.from("audio").upload(path, file);
+
+    if (uploadError) {
+      statusEl.textContent = "Upload failed: " + uploadError.message;
+      waveformStatus.textContent = "Upload failed";
+      return;
+    }
+
+    const trackType = file.name.toLowerCase().includes("music") ? "music" : "voiceover";
+    const { error: insertError } = await supabase.from("audio_tracks").insert({
+      user_id: userId,
+      storage_path: path,
+      title: file.name,
+      track_type: trackType
+    });
+
+    if (insertError) {
+      statusEl.textContent = "Saved file but failed to record it: " + insertError.message;
+      return;
+    }
+
+    const { data: signed } = await supabase.storage.from("audio").createSignedUrl(path, 3600);
+    waveformStatus.textContent = file.name;
+    playerWrap.innerHTML = `<audio controls src="${signed?.signedUrl || ''}" class="w-full"></audio>`;
+    statusEl.textContent = "Uploaded and saved!";
+  }
+})();
+</script>
 </body></html>

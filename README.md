@@ -1,10 +1,29 @@
 # B-Roll Studio — Website
 
-Static prototype site generated from the Stitch UI/UX design (`DESIGN.md`).
-This is a **visual prototype**: all 10 screens are real HTML/CSS (Tailwind),
-linked together with a floating nav bar at the bottom of each page so you can
-click through the whole flow. Forms, login, uploads, and AI features are
-**not wired up yet** — that's a follow-up phase once you want a real backend.
+A working website generated from the Stitch UI/UX design (`DESIGN.md`), now
+backed by a real Supabase project (Auth, Postgres database, Storage).
+
+## What's functional
+- **Sign up / Log in** — real accounts via Supabase Auth (email + password)
+- **Dashboard** — lists your real scripts, redirects to login if you're signed out
+- **Script input** — save/edit scripts to the database
+- **Clip gallery** — upload video clips to Supabase Storage, listed per-user
+- **Audio upload** — upload voiceover/music files to Supabase Storage
+- **Export** — creates a real export request row (status: queued) in the database
+
+## What's not built yet
+- Actual video rendering/encoding (the export request is recorded, but nothing
+  currently processes it into a rendered file — that needs a video-processing
+  backend/worker, which is a separate project)
+- AI script analysis / AI clip suggestions
+- Full drag-and-drop timeline editing (the timeline-assembly page is still a
+  visual mockup)
+
+## Backend
+Supabase project: `broll-studio` (`jctjfwoihtygvlhqmifs`)
+- Tables: `profiles`, `scripts`, `clips`, `timelines`, `timeline_items`, `audio_tracks`, `exports` — all with Row Level Security so each user only sees their own data
+- Storage buckets: `clips`, `audio`, `exports` (private, per-user folders)
+- Client config lives in `js/supabase-client.js`
 
 ## Pages
 - `index.html` — Landing page

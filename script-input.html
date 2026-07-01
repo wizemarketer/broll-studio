@@ -6,6 +6,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -169,19 +171,20 @@
 <!-- Page Header -->
 <header class="h-20 px-lg md:px-xl flex items-center justify-between border-b border-outline-variant sticky top-0 bg-surface/90 backdrop-blur-md z-30">
 <div class="flex items-center gap-md">
-<button class="h-10 w-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors text-on-surface-variant group">
+<button class="h-10 w-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors text-on-surface-variant group" onclick="window.location.href='dashboard.html'">
 <span class="material-symbols-outlined group-hover:-translate-x-1 transition-transform" data-icon="arrow_back">arrow_back</span>
 </button>
 <div>
 <div class="font-body-sm text-body-sm text-on-surface-variant mb-xs">Back to Dashboard</div>
-<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface">New Project</h1>
+<input id="scriptTitle" class="font-headline-lg text-headline-lg font-bold text-on-surface bg-transparent border-none outline-none focus:ring-0 p-0" value="New Project" />
 </div>
 </div>
 <!-- Desktop Top Actions (Mirrors Mobile TopNav trailing actions) -->
 <div class="hidden md:flex items-center gap-md">
-<button class="bg-primary text-on-primary font-label-md text-label-md font-semibold py-2 px-4 rounded-lg hover:bg-primary-container transition-colors shadow-sm flex items-center gap-2">
-<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
-                    New Project
+<span id="saveStatus" class="font-label-sm text-label-sm text-on-surface-variant"></span>
+<button id="saveScriptBtn" class="bg-primary text-on-primary font-label-md text-label-md font-semibold py-2 px-4 rounded-lg hover:bg-primary-container transition-colors shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="save">save</span>
+                    Save Script
                 </button>
 <div class="h-6 w-px bg-outline-variant mx-sm"></div>
 <button class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center h-10 w-10 rounded-full hover:bg-surface-container">
@@ -219,7 +222,7 @@
 </div>
 <!-- Text Area -->
 <div class="flex-1 p-md relative group">
-<textarea class="w-full h-full resize-none border-none outline-none bg-transparent font-body-lg text-body-lg text-on-surface placeholder:text-on-surface-variant/50 focus:ring-0 p-0" placeholder="Paste your script here..."></textarea>
+<textarea id="scriptContent" class="w-full h-full resize-none border-none outline-none bg-transparent font-body-lg text-body-lg text-on-surface placeholder:text-on-surface-variant/50 focus:ring-0 p-0" placeholder="Paste your script here..."></textarea>
 <!-- Character Counter -->
 <div class="absolute bottom-md right-md font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-2 py-1 rounded">
                                 0 chars
@@ -303,4 +306,63 @@
   <a href="export-modal.html" style="color:#b7c8dd;text-decoration:none;">Export</a>
   <a href="video-preview-modal.html" style="color:#b7c8dd;text-decoration:none;">Preview</a>
 </div>
+<script>
+(async () => {
+  const session = await requireAuth();
+  if (!session) return;
+
+  const params = new URLSearchParams(window.location.search);
+  let scriptId = params.get("script");
+
+  const titleEl = document.getElementById("scriptTitle");
+  const contentEl = document.getElementById("scriptContent");
+  const statusEl = document.getElementById("saveStatus");
+  const saveBtn = document.getElementById("saveScriptBtn");
+
+  if (scriptId) {
+    const { data, error } = await supabase
+      .from("scripts")
+      .select("id, title, content")
+      .eq("id", scriptId)
+      .single();
+    if (!error && data) {
+      titleEl.value = data.title;
+      contentEl.value = data.content;
+    }
+  }
+
+  saveBtn.addEventListener("click", async () => {
+    saveBtn.disabled = true;
+    statusEl.textContent = "Saving...";
+
+    const payload = {
+      user_id: session.user.id,
+      title: titleEl.value.trim() || "Untitled Script",
+      content: contentEl.value,
+      status: "draft"
+    };
+
+    let result;
+    if (scriptId) {
+      result = await supabase.from("scripts").update(payload).eq("id", scriptId).select().single();
+    } else {
+      result = await supabase.from("scripts").insert(payload).select().single();
+    }
+
+    saveBtn.disabled = false;
+
+    if (result.error) {
+      statusEl.textContent = "Error: " + result.error.message;
+      statusEl.style.color = "#ba1a1a";
+      return;
+    }
+
+    scriptId = result.data.id;
+    // Reflect the new id in the URL without reloading the page.
+    window.history.replaceState({}, "", "script-input.html?script=" + scriptId);
+    statusEl.style.color = "#00677d";
+    statusEl.textContent = "Saved just now";
+  });
+})();
+</script>
 </body></html>

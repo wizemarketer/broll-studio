@@ -24,6 +24,8 @@
             -webkit-font-smoothing: antialiased;
         }
     </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -140,7 +142,7 @@
 <!-- File Name -->
 <div class="flex flex-col gap-sm">
 <label class="font-label-md text-label-md text-on-surface-variant">File Name</label>
-<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-md py-sm font-body-lg text-on-surface focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-all" type="text" value="Nature_Vlog_Final">
+<input id="exportFileName" class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-md py-sm font-body-lg text-on-surface focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-all" type="text" value="My_Video_Export">
 </div>
 <!-- Format Selection -->
 <div class="flex flex-col gap-sm">
@@ -154,22 +156,19 @@
 <!-- Resolution Selection -->
 <div class="flex flex-col gap-sm">
 <label class="font-label-md text-label-md text-on-surface-variant">Resolution</label>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-sm">
-<!-- Option 1 -->
-<div class="border border-outline-variant rounded-lg p-md cursor-pointer hover:border-secondary hover:bg-surface-container transition-all flex flex-col items-center text-center">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-sm" id="resolutionOptions">
+<div class="res-option border border-outline-variant rounded-lg p-md cursor-pointer hover:border-secondary hover:bg-surface-container transition-all flex flex-col items-center text-center" data-res="720p">
 <span class="font-headline-md text-headline-md text-on-surface">720p</span>
 <span class="font-body-sm text-body-sm text-on-surface-variant">HD</span>
 </div>
-<!-- Option 2 (Selected) -->
-<div class="border-2 border-secondary bg-surface-container rounded-lg p-md cursor-pointer relative flex flex-col items-center text-center">
-<div class="absolute top-sm right-sm text-secondary">
+<div class="res-option border-2 border-secondary bg-surface-container rounded-lg p-md cursor-pointer relative flex flex-col items-center text-center" data-res="1080p">
+<div class="absolute top-sm right-sm text-secondary check-mark">
 <span class="material-symbols-outlined text-[16px]" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
 </div>
 <span class="font-headline-md text-headline-md text-on-surface">1080p</span>
 <span class="font-body-sm text-body-sm text-on-surface-variant">Full HD</span>
 </div>
-<!-- Option 3 -->
-<div class="border border-outline-variant rounded-lg p-md cursor-pointer hover:border-secondary hover:bg-surface-container transition-all flex flex-col items-center text-center">
+<div class="res-option border border-outline-variant rounded-lg p-md cursor-pointer hover:border-secondary hover:bg-surface-container transition-all flex flex-col items-center text-center" data-res="4K">
 <span class="font-headline-md text-headline-md text-on-surface">4K</span>
 <span class="font-body-sm text-body-sm text-on-surface-variant">Ultra HD</span>
 </div>
@@ -190,26 +189,19 @@
 </div>
 </div>
 </div>
-<!-- Progress Section (Simulated Active State) -->
-<div class="flex flex-col gap-sm pt-sm border-t border-outline-variant">
+<!-- Status Section (real) -->
+<div class="flex flex-col gap-sm pt-sm border-t border-outline-variant" id="exportStatusSection" style="display:none;">
 <div class="flex justify-between items-end">
-<span class="font-label-sm text-label-sm text-secondary">Preparing your video...</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">65%</span>
-</div>
-<div class="w-full h-2 bg-surface-variant rounded-full overflow-hidden">
-<div class="h-full bg-secondary w-[65%] rounded-full relative overflow-hidden">
-<!-- Shimmer effect -->
-<div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-[shimmer_2s_infinite]"></div>
-</div>
+<span class="font-label-sm text-label-sm text-secondary" id="exportStatusText">Queued...</span>
 </div>
 </div>
 </div>
 <!-- Modal Footer -->
 <div class="p-lg border-t border-outline-variant bg-surface flex justify-end gap-sm">
-<button class="px-lg py-sm rounded-lg font-label-md text-label-md text-on-surface border border-outline-variant hover:bg-surface-container-highest transition-colors">
+<button class="px-lg py-sm rounded-lg font-label-md text-label-md text-on-surface border border-outline-variant hover:bg-surface-container-highest transition-colors" onclick="window.location.href='dashboard.html'">
                     Cancel
                 </button>
-<button class="px-lg py-sm rounded-lg font-label-md text-label-md bg-primary text-on-primary hover:bg-primary/90 transition-colors flex items-center gap-xs shadow-sm">
+<button id="startExportBtn" class="px-lg py-sm rounded-lg font-label-md text-label-md bg-primary text-on-primary hover:bg-primary/90 transition-colors flex items-center gap-xs shadow-sm">
 <span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
                     Export &amp; Download
                 </button>
@@ -236,4 +228,75 @@
   <a href="export-modal.html" style="color:#b7c8dd;text-decoration:none;">Export</a>
   <a href="video-preview-modal.html" style="color:#b7c8dd;text-decoration:none;">Preview</a>
 </div>
+<script>
+(async () => {
+  const session = await requireAuth();
+  if (!session) return;
+  const userId = session.user.id;
+
+  let selectedResolution = "1080p";
+  const resOptions = document.querySelectorAll(".res-option");
+  resOptions.forEach(opt => {
+    opt.addEventListener("click", () => {
+      resOptions.forEach(o => {
+        o.classList.remove("border-2", "border-secondary", "bg-surface-container");
+        o.classList.add("border", "border-outline-variant");
+        const mark = o.querySelector(".check-mark");
+        if (mark) mark.remove();
+      });
+      opt.classList.remove("border", "border-outline-variant");
+      opt.classList.add("border-2", "border-secondary", "bg-surface-container");
+      selectedResolution = opt.dataset.res;
+    });
+  });
+
+  const startBtn = document.getElementById("startExportBtn");
+  const statusSection = document.getElementById("exportStatusSection");
+  const statusText = document.getElementById("exportStatusText");
+
+  startBtn.addEventListener("click", async () => {
+    startBtn.disabled = true;
+    statusSection.style.display = "flex";
+    statusText.textContent = "Creating export request...";
+
+    const params = new URLSearchParams(window.location.search);
+    let timelineId = params.get("timeline");
+
+    // If no timeline is specified, create a lightweight one so the export has something to point to.
+    if (!timelineId) {
+      const { data: timeline, error: timelineError } = await supabase
+        .from("timelines")
+        .insert({ user_id: userId, title: document.getElementById("exportFileName").value.trim() || "Untitled Timeline" })
+        .select()
+        .single();
+      if (timelineError) {
+        statusText.textContent = "Error: " + timelineError.message;
+        startBtn.disabled = false;
+        return;
+      }
+      timelineId = timeline.id;
+    }
+
+    const { data: exportRow, error } = await supabase
+      .from("exports")
+      .insert({
+        user_id: userId,
+        timeline_id: timelineId,
+        status: "queued",
+        resolution: selectedResolution
+      })
+      .select()
+      .single();
+
+    startBtn.disabled = false;
+
+    if (error) {
+      statusText.textContent = "Error: " + error.message;
+      return;
+    }
+
+    statusText.textContent = "Export request queued (id: " + exportRow.id.slice(0, 8) + "...). Rendering isn't hooked up to a video engine yet — this just records the request.";
+  });
+})();
+</script>
 </body></html>

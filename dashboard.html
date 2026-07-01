@@ -8,6 +8,8 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -190,9 +192,9 @@
 <span class="material-symbols-outlined">help</span>
                     Help
                 </a>
-<a class="flex items-center gap-md px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg font-label-md text-label-md" href="#">
-<span class="material-symbols-outlined">rate_review</span>
-                    Feedback
+<a class="flex items-center gap-md px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg font-label-md text-label-md" href="#" onclick="signOut(); return false;">
+<span class="material-symbols-outlined">logout</span>
+                    Log Out
                 </a>
 <button class="mt-sm w-full py-2 bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:opacity-90 transition-opacity">
                     Upgrade to Pro
@@ -204,10 +206,10 @@
 <!-- Dashboard Header -->
 <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-xl gap-md">
 <div>
-<h1 class="font-headline-xl text-headline-xl text-primary">Welcome back, Alex!</h1>
+<h1 class="font-headline-xl text-headline-xl text-primary" id="welcomeHeading">Welcome back!</h1>
 <p class="font-body-lg text-body-lg text-on-surface-variant mt-1">Here's what's happening with your studio today.</p>
 </div>
-<button class="bg-secondary text-on-secondary px-6 py-3 rounded-lg font-label-md text-label-md flex items-center gap-2 hover:opacity-90 transition-opacity shadow-sm">
+<button class="bg-secondary text-on-secondary px-6 py-3 rounded-lg font-label-md text-label-md flex items-center gap-2 hover:opacity-90 transition-opacity shadow-sm" onclick="window.location.href='script-input.html'">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_circle</span>
                     New Project
                 </button>
@@ -220,7 +222,7 @@
 <span class="material-symbols-outlined text-primary-container">folder_open</span>
 </div>
 <div class="mt-md">
-<span class="font-headline-xl text-headline-xl text-primary">12</span>
+<span class="font-headline-xl text-headline-xl text-primary" id="statProjects">0</span>
 <p class="font-body-sm text-body-sm text-on-primary-container mt-1">+2 this week</p>
 </div>
 </div>
@@ -230,7 +232,7 @@
 <span class="material-symbols-outlined text-secondary">movie_creation</span>
 </div>
 <div class="mt-md">
-<span class="font-headline-xl text-headline-xl text-primary">8</span>
+<span class="font-headline-xl text-headline-xl text-primary" id="statExports">0</span>
 <p class="font-body-sm text-body-sm text-on-primary-container mt-1">Ready to share</p>
 </div>
 </div>
@@ -253,59 +255,79 @@
 <h2 class="font-headline-md text-headline-md text-primary">Recent Projects</h2>
 <a class="font-label-sm text-label-sm text-secondary hover:underline" href="#">View All</a>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
-<!-- Card 1 -->
-<div class="bg-surface-container-lowest rounded-xl overflow-hidden card-border ambient-shadow group cursor-pointer">
-<div class="h-40 relative bg-surface-container-highest">
-<img class="w-full h-full object-cover" data-alt="A high-quality video thumbnail showing a sleek tech desk setup with a glowing keyboard, monitor, and studio microphone, cinematic lighting, corporate modern aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBanLsxHandyMYM4N9Ua3HJdE_4zItfeDjjb7sgJ2xDjNYKpORhOl0JKmI7FnPdsopek-IuHmJ-xAJmo1GBZ9S-4s7TDbxf1M8Zed9md6A7TYnNQGIh695_sh7Cw6E9InLWRul3WxgLl-F2VqtK9I-p2b7mhxATH2esQTVWqKueYiFRziJ6w6D3Y8Kv0cf-fCmee0Eu5Ukcsulg_7UKT4aCL2lzqUnrqoB5osO8FhHh4kUHLiWOtdGKa7ZTIVdiDcO-2Hdl9Nh0K3c">
-<div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity"></div>
-<div class="absolute bottom-2 right-2 bg-primary text-on-primary font-label-sm text-label-sm px-2 py-1 rounded">12:45</div>
-</div>
-<div class="p-md">
-<div class="flex justify-between items-start mb-sm">
-<h3 class="font-headline-sm text-headline-sm font-semibold text-primary truncate">Tech Review 2024</h3>
-<span class="bg-secondary-container text-on-secondary-container font-label-sm text-label-sm px-2 py-1 rounded-full">Draft</span>
-</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Last edited 2 hours ago</p>
-<div class="flex gap-xs">
-<span class="bg-surface-container px-2 py-1 rounded-full font-label-sm text-label-sm text-primary">Tech</span>
-<span class="bg-surface-container px-2 py-1 rounded-full font-label-sm text-label-sm text-primary">Review</span>
-</div>
-</div>
-</div>
-<!-- Card 2 -->
-<div class="bg-surface-container-lowest rounded-xl overflow-hidden card-border ambient-shadow group cursor-pointer">
-<div class="h-40 relative bg-surface-container-highest">
-<img class="w-full h-full object-cover" data-alt="A cinematic video thumbnail of a lush green forest path winding through tall trees, misty morning sunlight piercing through leaves, vibrant and natural." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQcpiGCbcQxuhom-Dp9kdD2Y9ikaenfZUnXBjht7vTAjUyXHboffxedNxMcZUqd3PBw7FW1buidmmX1thowyv-SUxNf--cdkK1OZLbpBkWfpg8OHEi4OvBVfh99mXXJpwN6Avs38zjQhBhjtZtA5KNwptPBZj9wOxQMZVeDNsKBevzMadDLRdaY-LluYs5Xh6KFXnX0UOVrGbbaNYq_VU38PcRe92eghOPERZB_XZtb4bDgv1hJo14JleTtxDG9BxF9oOP0pmksEw">
-<div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity"></div>
-<div class="absolute bottom-2 right-2 bg-primary text-on-primary font-label-sm text-label-sm px-2 py-1 rounded">08:20</div>
-</div>
-<div class="p-md">
-<div class="flex justify-between items-start mb-sm">
-<h3 class="font-headline-sm text-headline-sm font-semibold text-primary truncate">Nature Vlog: Pacific NW</h3>
-<span class="bg-surface-container-high text-on-surface font-label-sm text-label-sm px-2 py-1 rounded-full">Complete</span>
-</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Exported yesterday</p>
-<div class="flex gap-xs">
-<span class="bg-surface-container px-2 py-1 rounded-full font-label-sm text-label-sm text-primary">Travel</span>
-<span class="bg-surface-container px-2 py-1 rounded-full font-label-sm text-label-sm text-primary">Vlog</span>
-</div>
-</div>
-</div>
-<!-- Quick Start / Empty State Slot -->
-<div class="bg-surface-container border-2 border-dashed border-outline-variant rounded-xl flex flex-col items-center justify-center p-xl text-center hover:bg-surface-container-high transition-colors cursor-pointer min-h-[250px]">
-<div class="w-16 h-16 bg-surface-container-highest rounded-full flex items-center justify-center mb-md">
-<span class="material-symbols-outlined text-primary text-3xl">add</span>
-</div>
-<h3 class="font-headline-md text-headline-md text-primary mb-2">Ready to create?</h3>
-<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xs mb-md">Start with a new script or import media to begin your next project.</p>
-<button class="text-secondary font-label-md text-label-md flex items-center gap-1 hover:underline">
-                            Start new project <span class="material-symbols-outlined text-sm">arrow_forward</span>
-</button>
-</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md" id="projectsGrid">
+<p class="text-on-surface-variant font-body-sm text-body-sm">Loading your projects...</p>
 </div>
 </section>
 </main>
+<script>
+(async () => {
+  const session = await requireAuth();
+  if (!session) return;
+
+  const user = session.user;
+  document.getElementById("welcomeHeading").textContent =
+    "Welcome back, " + (user.user_metadata?.full_name?.split(" ")[0] || "there") + "!";
+
+  const grid = document.getElementById("projectsGrid");
+
+  const { data: scripts, error } = await supabase
+    .from("scripts")
+    .select("id, title, status, updated_at")
+    .order("updated_at", { ascending: false });
+
+  const { count: exportCount } = await supabase
+    .from("exports")
+    .select("id", { count: "exact", head: true })
+    .eq("status", "complete");
+
+  document.getElementById("statProjects").textContent = scripts ? scripts.length : 0;
+  document.getElementById("statExports").textContent = exportCount || 0;
+
+  if (error) {
+    grid.innerHTML = '<p class="text-on-surface-variant font-body-sm text-body-sm">Could not load projects: ' + error.message + '</p>';
+    return;
+  }
+
+  const emptyStateCard = `
+    <div class="bg-surface-container border-2 border-dashed border-outline-variant rounded-xl flex flex-col items-center justify-center p-xl text-center hover:bg-surface-container-high transition-colors cursor-pointer min-h-[250px]" onclick="window.location.href='script-input.html'">
+      <div class="w-16 h-16 bg-surface-container-highest rounded-full flex items-center justify-center mb-md">
+        <span class="material-symbols-outlined text-primary text-3xl">add</span>
+      </div>
+      <h3 class="font-headline-md text-headline-md text-primary mb-2">Ready to create?</h3>
+      <p class="font-body-sm text-body-sm text-on-surface-variant max-w-xs mb-md">Start with a new script to begin your next project.</p>
+      <span class="text-secondary font-label-md text-label-md flex items-center gap-1 hover:underline">
+        Start new project <span class="material-symbols-outlined text-sm">arrow_forward</span>
+      </span>
+    </div>`;
+
+  if (!scripts || scripts.length === 0) {
+    grid.innerHTML = emptyStateCard;
+    return;
+  }
+
+  const statusStyles = {
+    draft: "bg-secondary-container text-on-secondary-container",
+    analyzing: "bg-surface-container-high text-on-surface",
+    ready: "bg-surface-container-high text-on-surface"
+  };
+
+  grid.innerHTML = scripts.map(s => `
+    <div class="bg-surface-container-lowest rounded-xl overflow-hidden card-border ambient-shadow group cursor-pointer" onclick="window.location.href='script-input.html?script=${s.id}'">
+      <div class="h-40 relative bg-surface-container-highest flex items-center justify-center">
+        <span class="material-symbols-outlined text-on-surface-variant text-4xl">description</span>
+      </div>
+      <div class="p-md">
+        <div class="flex justify-between items-start mb-sm">
+          <h3 class="font-headline-sm text-headline-sm font-semibold text-primary truncate">${s.title}</h3>
+          <span class="${statusStyles[s.status] || statusStyles.draft} font-label-sm text-label-sm px-2 py-1 rounded-full capitalize">${s.status}</span>
+        </div>
+        <p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Last edited ${new Date(s.updated_at).toLocaleString()}</p>
+      </div>
+    </div>
+  `).join("") + emptyStateCard;
+})();
+</script>
 </div>
 
 <div id="proto-nav" style="position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;background:#041525;color:#fff;padding:8px 14px;border-radius:9999px;font-family:Inter,sans-serif;font-size:12px;display:flex;gap:10px;flex-wrap:wrap;max-width:92vw;box-shadow:0 4px 16px rgba(0,0,0,0.25);">

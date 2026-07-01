@@ -11,6 +11,8 @@
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
     </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
 <script id="tailwind-config">
         tailwind.config = {
           darkMode: "class",
@@ -221,154 +223,18 @@
 <!-- Main Section: Clip Grid -->
 <section>
 <div class="flex justify-between items-center mb-md">
-<h3 class="font-headline-md text-headline-md text-primary">Suggested Clips</h3>
-<div class="flex gap-sm">
-<button class="border border-outline-variant bg-surface-container-lowest p-sm rounded-lg text-on-surface-variant hover:text-primary transition-colors flex items-center">
-<span class="material-symbols-outlined text-[18px]">filter_list</span>
-</button>
-<button class="border border-outline-variant bg-surface-container-lowest p-sm rounded-lg text-on-surface-variant hover:text-primary transition-colors flex items-center">
-<span class="material-symbols-outlined text-[18px]">grid_view</span>
-</button>
+<h3 class="font-headline-md text-headline-md text-primary">Your Clips</h3>
+<div class="flex gap-sm items-center">
+<span id="uploadStatus" class="font-label-sm text-label-sm text-on-surface-variant"></span>
+<input type="file" id="clipFileInput" class="hidden" accept="video/*" />
+<button id="uploadClipBtn" class="bg-secondary text-on-secondary font-label-md text-label-md px-md py-sm rounded-lg hover:bg-secondary/90 transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">upload</span>
+                        Upload Clip
+                    </button>
 </div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-md">
-<!-- Clip Card 1 -->
-<article class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden flex flex-col group hover:shadow-[0_4px_20px_rgba(26,42,58,0.08)] hover:border-outline transition-all duration-300">
-<div class="w-full aspect-video relative bg-surface-variant overflow-hidden cursor-pointer">
-<img class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" data-alt="A high-quality, cinematic close-up shot of a vibrant red-and-blue macaw perched on a mossy branch in the dense Amazon rainforest. Sunlight filters beautifully through the lush, green canopy, creating dynamic dappled lighting. The image embodies a professional, modern documentary style, with sharp focus on the bird and a softly blurred background. The overall aesthetic is bright, clear, and perfectly suited for a high-end light-mode video editing interface, emphasizing rich natural colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvHj0o8zx9ZvVOQ6_akvk0MyZnm8Ue8P1uX9IqkXKlMUx-4GusYNbQ1_0hBmKqMQcu_H-m7Z8vFwdbdFRf9ind9I4XsOHzSpF-pM_GQ2PjxNUVqpT9-QRv2aZxd5yRrBcgpjeRSuOBZ00rsD4W7R758fcbkMHSd95-cNMpGLJrvi5fDZ2ZGZkdY5Y9VgmN06JonBIH2JCyw1rZ1Z0gyiy_OZZ-olvMDKfIh4qf7cjCo44PyjYqVP105G5pwviDKIHafRIplKVYPEs">
-<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300"></div>
-<div class="absolute top-sm left-sm bg-primary/90 backdrop-blur-sm text-on-primary font-label-sm text-[10px] px-2 py-0.5 rounded-full border border-white/20">
-                                    Pexels
-                                </div>
-<div class="absolute bottom-sm right-sm bg-surface/90 backdrop-blur-sm text-on-surface font-label-sm text-[10px] px-1.5 py-0.5 rounded shadow-sm">
-                                    00:12
-                                </div>
-<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-<div class="w-12 h-12 bg-surface/80 backdrop-blur-md rounded-full flex items-center justify-center text-primary shadow-lg transform scale-90 group-hover:scale-100 transition-transform duration-300">
-<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
-</div>
-</div>
-</div>
-<div class="p-md flex flex-col gap-sm border-t border-outline-variant">
-<div class="flex items-center justify-between">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Relevance</span>
-<span class="font-label-sm text-label-sm text-secondary font-bold">98%</span>
-</div>
-<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-secondary w-[98%] rounded-full"></div>
-</div>
-<div class="mt-xs flex items-center justify-between">
-<button class="text-on-surface-variant hover:text-primary font-label-md text-label-md flex items-center gap-xs transition-colors">
-<span class="material-symbols-outlined text-[18px]">visibility</span>
-                                        Preview
-                                    </button>
-<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-secondary hover:text-on-secondary transition-colors border border-outline-variant hover:border-secondary">
-<span class="material-symbols-outlined text-[20px]">add</span>
-</button>
-</div>
-</div>
-</article>
-<!-- Clip Card 2 -->
-<article class="bg-surface-container-lowest rounded-xl border border-secondary border-2 overflow-hidden flex flex-col group hover:shadow-[0_4px_20px_rgba(26,42,58,0.08)] transition-all duration-300 relative shadow-sm">
-<!-- Selected indicator -->
-<div class="absolute top-sm right-sm z-10 bg-secondary text-on-secondary w-6 h-6 rounded-full flex items-center justify-center shadow-md">
-<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check</span>
-</div>
-<div class="w-full aspect-video relative bg-surface-variant overflow-hidden cursor-pointer">
-<img class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" data-alt="A sweeping aerial drone shot of the winding Amazon river cutting through an endless expanse of vibrant green rainforest canopy. The lighting is bright and clear, reflecting a sunny day with soft, natural contrast. The water reflects the bright blue sky. This cinematic footage style fits seamlessly into a modern, corporate video editing software context, serving as premium b-roll. The visual tone is expansive, crisp, and aligns with a clean light-mode UI design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVfE41SklB-LKzdOXHZTXqB5uCHtC2uHJvpkCOn1fT2KsD2cjTkL2oWldk99OESUd3V_GqQmMjeSISN3SYfu9MT336MZfmGC9YAdM6JIYq7KhRGZ5ixmV4aPZy3DIaFDMyu4joJZKasGaVTstV5gYuTe7EGvedLYk9OoArb3APRC6b_kM_K6vgm8_XbsJb3fVuwQN07mdmL38wjLsFC2uQ-Gc1dB3N2aFd5TF_uArDc5G21KhR0Mtv-q4XaelfoYCwpcOpgCxYbVI">
-<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300"></div>
-<div class="absolute top-sm left-sm bg-primary/90 backdrop-blur-sm text-on-primary font-label-sm text-[10px] px-2 py-0.5 rounded-full border border-white/20">
-                                    Envato
-                                </div>
-<div class="absolute bottom-sm right-sm bg-surface/90 backdrop-blur-sm text-on-surface font-label-sm text-[10px] px-1.5 py-0.5 rounded shadow-sm">
-                                    00:18
-                                </div>
-</div>
-<div class="p-md flex flex-col gap-sm border-t border-outline-variant bg-secondary-fixed/20">
-<div class="flex items-center justify-between">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Relevance</span>
-<span class="font-label-sm text-label-sm text-secondary font-bold">92%</span>
-</div>
-<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-secondary w-[92%] rounded-full"></div>
-</div>
-<div class="mt-xs flex items-center justify-between">
-<button class="text-on-surface-variant hover:text-primary font-label-md text-label-md flex items-center gap-xs transition-colors">
-<span class="material-symbols-outlined text-[18px]">visibility</span>
-                                        Preview
-                                    </button>
-<button class="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center hover:bg-secondary-container hover:text-on-secondary-container transition-colors shadow-sm">
-<span class="material-symbols-outlined text-[20px]">remove</span>
-</button>
-</div>
-</div>
-</article>
-<!-- Clip Card 3 -->
-<article class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden flex flex-col group hover:shadow-[0_4px_20px_rgba(26,42,58,0.08)] hover:border-outline transition-all duration-300">
-<div class="w-full aspect-video relative bg-surface-variant overflow-hidden cursor-pointer">
-<img class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" data-alt="A meticulously composed tracking shot moving slowly through the dense undergrowth of a tropical rainforest. Huge, waxy green leaves dominate the foreground, with rays of crisp, bright light piercing through the gaps to illuminate patches of mossy bark. The visual aesthetic is highly professional, sharply focused, and ideal for a modern light-mode documentary project. The atmosphere is serene, emphasizing natural textures and vibrant, healthy plant life." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOJjt1uBX3GMNuZQLmAHvMk8PhHMO-nO9TJ9vMk9l_0MQr7R7QTA6sP5_aIAaJjmeSc6yMKoFepZQG08UlE16EkjxTTbE0MPvqoGkn3hrM-yGJqQr8lekWZgukERTJgjNeKkxtg3axmEWFgMggUNWLmyw8D8yABVGbCn-FKQOSMUQ4bRihXqFOp-IKbB9tmU7eLwagAk7K-3jvDTW8h6MD0maeI15REzjTsCPgB46I8hvBjT0xLfKYn1tOzopjeJwEPgb0KLqTP7A">
-<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300"></div>
-<div class="absolute top-sm left-sm bg-primary/90 backdrop-blur-sm text-on-primary font-label-sm text-[10px] px-2 py-0.5 rounded-full border border-white/20">
-                                    Pexels
-                                </div>
-<div class="absolute bottom-sm right-sm bg-surface/90 backdrop-blur-sm text-on-surface font-label-sm text-[10px] px-1.5 py-0.5 rounded shadow-sm">
-                                    00:08
-                                </div>
-</div>
-<div class="p-md flex flex-col gap-sm border-t border-outline-variant">
-<div class="flex items-center justify-between">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Relevance</span>
-<span class="font-label-sm text-label-sm text-secondary font-bold">85%</span>
-</div>
-<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-secondary w-[85%] rounded-full opacity-80"></div>
-</div>
-<div class="mt-xs flex items-center justify-between">
-<button class="text-on-surface-variant hover:text-primary font-label-md text-label-md flex items-center gap-xs transition-colors">
-<span class="material-symbols-outlined text-[18px]">visibility</span>
-                                        Preview
-                                    </button>
-<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-secondary hover:text-on-secondary transition-colors border border-outline-variant hover:border-secondary">
-<span class="material-symbols-outlined text-[20px]">add</span>
-</button>
-</div>
-</div>
-</article>
-<!-- Clip Card 4 -->
-<article class="bg-surface-container-lowest rounded-xl border border-secondary border-2 overflow-hidden flex flex-col group hover:shadow-[0_4px_20px_rgba(26,42,58,0.08)] transition-all duration-300 relative shadow-sm">
-<!-- Selected indicator -->
-<div class="absolute top-sm right-sm z-10 bg-secondary text-on-secondary w-6 h-6 rounded-full flex items-center justify-center shadow-md">
-<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check</span>
-</div>
-<div class="w-full aspect-video relative bg-surface-variant overflow-hidden cursor-pointer">
-<img class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" data-alt="A breathtaking time-lapse shot of rolling white clouds moving quickly over an expansive, undulating green rainforest canopy. The sky is a bright, clear cyan, and the sunlight creates shifting patterns of light and shadow across the treetops. The footage feels expansive, premium, and perfectly color-graded for a corporate or high-end nature documentary. It integrates beautifully with a minimalist, light-mode interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDKE5uXV97QqZdkgh_b20XD1TO5VmTPjq99g7xiVQdMJHtRpHHfzxdpgcvEap08vLyPlGBtNXnNg5EBFxLbed338FokPhkFAzq39VKH3HTJSXtbuRJMo6C5u4tZcWIkEouannGimCnyUs1eDahvNruPIESOtgkKiiHWIEnogDVy0AsMlpC1MCQcK5GhVLUL_J3zCjYrK0IUFOZ_ZoDCwauB98qlDU8Q9BoMpC4waiTp2c_7RWlOZYjid7I7JxZLlK4c4lVQZRsKw8">
-<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300"></div>
-<div class="absolute top-sm left-sm bg-primary/90 backdrop-blur-sm text-on-primary font-label-sm text-[10px] px-2 py-0.5 rounded-full border border-white/20">
-                                    Artgrid
-                                </div>
-<div class="absolute bottom-sm right-sm bg-surface/90 backdrop-blur-sm text-on-surface font-label-sm text-[10px] px-1.5 py-0.5 rounded shadow-sm">
-                                    00:24
-                                </div>
-</div>
-<div class="p-md flex flex-col gap-sm border-t border-outline-variant bg-secondary-fixed/20">
-<div class="flex items-center justify-between">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Relevance</span>
-<span class="font-label-sm text-label-sm text-secondary font-bold">78%</span>
-</div>
-<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-secondary w-[78%] rounded-full opacity-60"></div>
-</div>
-<div class="mt-xs flex items-center justify-between">
-<button class="text-on-surface-variant hover:text-primary font-label-md text-label-md flex items-center gap-xs transition-colors">
-<span class="material-symbols-outlined text-[18px]">visibility</span>
-                                        Preview
-                                    </button>
-<button class="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center hover:bg-secondary-container hover:text-on-secondary-container transition-colors shadow-sm">
-<span class="material-symbols-outlined text-[20px]">remove</span>
-</button>
-</div>
-</div>
-</article>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-md" id="clipGrid">
+<p class="text-on-surface-variant font-body-sm text-body-sm">Loading clips...</p>
 </div>
 </section>
 </div>
@@ -403,4 +269,90 @@
   <a href="export-modal.html" style="color:#b7c8dd;text-decoration:none;">Export</a>
   <a href="video-preview-modal.html" style="color:#b7c8dd;text-decoration:none;">Preview</a>
 </div>
+<script>
+(async () => {
+  const session = await requireAuth();
+  if (!session) return;
+  const userId = session.user.id;
+
+  const grid = document.getElementById("clipGrid");
+  const fileInput = document.getElementById("clipFileInput");
+  const uploadBtn = document.getElementById("uploadClipBtn");
+  const statusEl = document.getElementById("uploadStatus");
+
+  async function loadClips() {
+    const { data: clips, error } = await supabase
+      .from("clips")
+      .select("id, storage_path, title, source, created_at")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      grid.innerHTML = '<p class="text-on-surface-variant font-body-sm text-body-sm">Could not load clips: ' + error.message + '</p>';
+      return;
+    }
+    if (!clips || clips.length === 0) {
+      grid.innerHTML = '<p class="text-on-surface-variant font-body-sm text-body-sm">No clips yet. Upload your first clip to get started.</p>';
+      return;
+    }
+
+    // Get a temporary signed URL for each clip so it can be previewed (bucket is private).
+    const cards = await Promise.all(clips.map(async (c) => {
+      const { data: signed } = await supabase.storage.from("clips").createSignedUrl(c.storage_path, 3600);
+      const videoUrl = signed?.signedUrl || "";
+      return `
+        <article class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden flex flex-col group hover:shadow-[0_4px_20px_rgba(26,42,58,0.08)] hover:border-outline transition-all duration-300">
+          <div class="w-full aspect-video relative bg-surface-variant overflow-hidden">
+            <video class="w-full h-full object-cover" src="${videoUrl}" muted controls preload="metadata"></video>
+          </div>
+          <div class="p-md flex flex-col gap-xs">
+            <h4 class="font-label-md text-label-md text-on-surface truncate">${c.title || c.storage_path.split("/").pop()}</h4>
+            <span class="font-label-sm text-label-sm text-on-surface-variant capitalize">${c.source.replace("_", " ")}</span>
+          </div>
+        </article>`;
+    }));
+
+    grid.innerHTML = cards.join("");
+  }
+
+  uploadBtn.addEventListener("click", () => fileInput.click());
+
+  fileInput.addEventListener("change", async () => {
+    const file = fileInput.files[0];
+    if (!file) return;
+
+    statusEl.textContent = "Uploading...";
+    uploadBtn.disabled = true;
+
+    const path = `${userId}/${Date.now()}-${file.name}`;
+    const { error: uploadError } = await supabase.storage.from("clips").upload(path, file);
+
+    if (uploadError) {
+      statusEl.textContent = "Upload failed: " + uploadError.message;
+      uploadBtn.disabled = false;
+      return;
+    }
+
+    const { error: insertError } = await supabase.from("clips").insert({
+      user_id: userId,
+      storage_path: path,
+      title: file.name,
+      source: "upload"
+    });
+
+    uploadBtn.disabled = false;
+    fileInput.value = "";
+
+    if (insertError) {
+      statusEl.textContent = "Saved file but failed to record it: " + insertError.message;
+      return;
+    }
+
+    statusEl.textContent = "Uploaded!";
+    setTimeout(() => statusEl.textContent = "", 2000);
+    loadClips();
+  });
+
+  loadClips();
+})();
+</script>
 </body></html>

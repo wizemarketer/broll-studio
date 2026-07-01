@@ -8,6 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -133,7 +135,8 @@
 <h2 class="font-headline-lg text-headline-lg text-primary mb-xs">Log In</h2>
 <p class="font-body-sm text-body-sm text-on-surface-variant">Access your creative workspace</p>
 </div>
-<form action="#" class="space-y-gutter" method="POST">
+<form class="space-y-gutter" id="logInForm">
+<p id="formMessage" style="display:none;font-size:13px;"></p>
 <!-- Email -->
 <div>
 <label class="block font-label-md text-label-md text-on-surface mb-xs" for="email">Email address</label>
@@ -155,11 +158,34 @@
                         </label>
 </div>
 <!-- Submit Button -->
-<button class="w-full bg-primary text-on-primary font-label-md text-label-md rounded-lg py-md hover:opacity-90 active:opacity-80 transition-opacity flex justify-center items-center gap-sm" type="submit">
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md rounded-lg py-md hover:opacity-90 active:opacity-80 transition-opacity flex justify-center items-center gap-sm" type="submit" id="logInSubmit">
                         Log In
                         <span class="material-symbols-outlined text-lg" data-icon="login">login</span>
 </button>
 </form>
+<script>
+  redirectIfSignedIn();
+
+  document.getElementById("logInForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const msgEl = document.getElementById("formMessage");
+    const btn = document.getElementById("logInSubmit");
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    btn.disabled = true;
+
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    btn.disabled = false;
+
+    if (error) {
+      showFormMessage(msgEl, error.message);
+      return;
+    }
+    window.location.href = "dashboard.html";
+  });
+</script>
 <!-- Divider -->
 <div class="mt-lg mb-lg flex items-center">
 <div class="flex-grow border-t border-surface-variant"></div>
