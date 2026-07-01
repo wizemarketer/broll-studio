@@ -1,0 +1,306 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>B-Roll Studio - Script Input</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed": "#001f27",
+                    "secondary-fixed": "#b3ebff",
+                    "surface-container-highest": "#e4e2e3",
+                    "on-surface": "#1b1c1d",
+                    "inverse-primary": "#b7c8dd",
+                    "surface-container": "#efedef",
+                    "secondary": "#00677d",
+                    "on-tertiary-container": "#a88b6b",
+                    "primary-fixed": "#d3e4fa",
+                    "on-tertiary-fixed-variant": "#594328",
+                    "on-primary-container": "#8191a5",
+                    "on-surface-variant": "#44474c",
+                    "surface-dim": "#dbd9db",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#50d9fe",
+                    "surface-tint": "#506072",
+                    "surface-variant": "#e4e2e3",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#ffddb9",
+                    "inverse-on-surface": "#f2f0f1",
+                    "on-secondary-fixed-variant": "#004e5f",
+                    "tertiary": "#211100",
+                    "on-primary-fixed-variant": "#384859",
+                    "on-background": "#1b1c1d",
+                    "primary-container": "#1a2a3a",
+                    "surface-container-high": "#eae7e9",
+                    "tertiary-container": "#38250d",
+                    "primary-fixed-dim": "#b7c8dd",
+                    "background": "#fbf9fa",
+                    "on-error": "#ffffff",
+                    "primary": "#041525",
+                    "surface-bright": "#fbf9fa",
+                    "on-primary-fixed": "#0c1d2c",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#fbf9fa",
+                    "outline-variant": "#c4c6cc",
+                    "on-secondary-container": "#005c70",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#e2c19e",
+                    "outline": "#74777d",
+                    "surface-container-low": "#f5f3f4",
+                    "secondary-fixed-dim": "#4cd6fb",
+                    "inverse-surface": "#303032",
+                    "on-tertiary-fixed": "#291803"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "lg": "24px",
+                    "sm": "8px",
+                    "xl": "32px",
+                    "margin": "24px",
+                    "md": "16px",
+                    "base": "8px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "headline-xl": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-xl-mobile": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-xl": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "fontWeight": "500"}],
+                    "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-xl-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-lg antialiased overflow-x-hidden min-h-screen flex flex-col md:flex-row">
+<!-- TopNavBar (Mobile Only) -->
+<header class="md:hidden sticky top-0 w-full z-50 flex justify-between items-center px-lg h-16 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline flat no shadows">
+<div class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed">B-Roll Studio</div>
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center h-10 w-10 rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center h-10 w-10 rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden bg-surface-container-high border border-outline-variant">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A professional headshot of a user in a clean, modern studio setting with soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRfjwsmXV1GKZZfaIoyR7AgfjRQGhyNARoD2j-X2ydQ8xpGY6p2Sm3-PvWaaqLtkoFzzXIV6XbFD1pSBAfU5FcXwPLKpwtPE87als3qPkVJ08brFPcaqgrU4wFEjLWHvBl6Z3cejypBYfWjOSxR1vtWTLCLrtArr5V6IpgwzhkhR18bEtQzR7rbC6n6yc0m9krk6vZ9-gMH4hrl8GDvhXz4ixdCvCDUpB04QcGeUDOMJN0eQxhEdr0Uo_UxIz4LKlfzDPE-NVIxI8">
+</div>
+</div>
+</header>
+<!-- SideNavBar (Desktop) -->
+<aside class="hidden md:flex flex-col p-md z-40 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline flat no shadows h-screen w-72 sticky top-0 left-0">
+<div class="flex items-center gap-md mb-xl px-sm pt-sm">
+<div class="h-10 w-10 rounded-lg bg-primary text-on-primary flex items-center justify-center overflow-hidden flex-shrink-0 shadow-sm">
+<img alt="Project icon" class="w-full h-full object-cover" data-alt="A small, abstract geometric logo representing a video project or folder, with clean lines and a modern blue and white color scheme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZApzkdnPa9-IVMi-HM0X2u7m-5KIHbKUNYxP2juO4BbbLPBVgLTPUxaz3ozV4cHc3Muu9-1zcOhgQYDcMgzJhVhkxgXRRkCeH5HRWb4xym2vNAuNTCX1Z7tCeVg03CQC8Ub8D8CwV-HSbQspK8qtjWrek_gdBkylCJTWnPKx6yZ4JhI3d9qqD0GPEl5MOzCyq3pV-wbcRvw0NMArEDX3HmcFWuVxQaPCEfua-NyKgML2-KES0D-FhjG9UJVybs2LeccqnpCpKNGI">
+</div>
+<div class="flex-1 overflow-hidden">
+<h2 class="font-headline-md text-headline-md font-bold text-primary truncate">Current Project</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Vlog #42 - Edited</p>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto pr-sm space-y-xs">
+<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-surface-container transition-all group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="folder">folder</span>
+<span class="font-label-md text-label-md font-medium">All Projects</span>
+</a>
+<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-surface-container transition-all group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="group">group</span>
+<span class="font-label-md text-label-md font-medium">Shared</span>
+</a>
+<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-surface-container transition-all group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="archive">archive</span>
+<span class="font-label-md text-label-md font-medium">Archived</span>
+</a>
+<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-surface-container transition-all group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="dashboard_customize">dashboard_customize</span>
+<span class="font-label-md text-label-md font-medium">Templates</span>
+</a>
+<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-surface-container transition-all group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="video_library">video_library</span>
+<span class="font-label-md text-label-md font-medium">Library</span>
+</a>
+</nav>
+<div class="mt-auto pt-lg border-t border-outline-variant space-y-md">
+<a class="flex items-center gap-md px-md py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="help">help</span>
+<span class="font-label-md text-label-md font-medium">Help</span>
+</a>
+<a class="flex items-center gap-md px-md py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="rate_review">rate_review</span>
+<span class="font-label-md text-label-md font-medium">Feedback</span>
+</a>
+<button class="w-full mt-md bg-secondary-container text-on-secondary-container font-label-md text-label-md font-bold py-3 px-4 rounded-lg hover:bg-secondary-fixed transition-colors shadow-sm flex items-center justify-center gap-sm">
+                Upgrade to Pro
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col min-w-0 bg-surface">
+<!-- Page Header -->
+<header class="h-20 px-lg md:px-xl flex items-center justify-between border-b border-outline-variant sticky top-0 bg-surface/90 backdrop-blur-md z-30">
+<div class="flex items-center gap-md">
+<button class="h-10 w-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors text-on-surface-variant group">
+<span class="material-symbols-outlined group-hover:-translate-x-1 transition-transform" data-icon="arrow_back">arrow_back</span>
+</button>
+<div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mb-xs">Back to Dashboard</div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface">New Project</h1>
+</div>
+</div>
+<!-- Desktop Top Actions (Mirrors Mobile TopNav trailing actions) -->
+<div class="hidden md:flex items-center gap-md">
+<button class="bg-primary text-on-primary font-label-md text-label-md font-semibold py-2 px-4 rounded-lg hover:bg-primary-container transition-colors shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+                    New Project
+                </button>
+<div class="h-6 w-px bg-outline-variant mx-sm"></div>
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center h-10 w-10 rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center h-10 w-10 rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-10 w-10 rounded-full overflow-hidden bg-surface-container-high border border-outline-variant cursor-pointer ml-sm shadow-sm hover:shadow-md transition-shadow">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A professional headshot of a user in a clean, modern studio setting with soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDE7fiKCG91_qvDTPiZ86kyvdLgx76Teb-U6xmCHXBGwi8WtexsWOq38JUBO52lHPOXDwR8_MPi6xL3Vrht677PJOHQXo0snfI6ZjCrX1b3eBtExIaL6CEWJjyVuXYI2DZ-Kv1Lt_BSdjqni_LtF-2qz23xq2KkN4xwQ_6Uz11CLVLGra2tnqbNcNDvFZAIT0UMavIHFYdxx5FTyxKRcKlxjMlSb1LrbUz3nQjcHQWMycoQvUF0Jq0Ns4opVh_yG9uZGb2LnfCGgYo">
+</div>
+</div>
+</header>
+<!-- Workspace Area -->
+<div class="flex-1 p-lg md:p-xl lg:p-[32px] overflow-y-auto">
+<div class="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-xl">
+<!-- Main Script Input Canvas (Left - 8 cols) -->
+<div class="lg:col-span-8 flex flex-col gap-md">
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-1 shadow-sm flex-1 flex flex-col min-h-[500px]">
+<!-- Toolbar -->
+<div class="h-12 border-b border-outline-variant px-md flex items-center gap-sm bg-surface-container-lowest rounded-t-xl">
+<button class="h-8 w-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="format_bold">format_bold</span>
+</button>
+<button class="h-8 w-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="format_italic">format_italic</span>
+</button>
+<div class="h-4 w-px bg-outline-variant mx-sm"></div>
+<button class="h-8 w-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="format_list_bulleted">format_list_bulleted</span>
+</button>
+<button class="h-8 w-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="format_list_numbered">format_list_numbered</span>
+</button>
+</div>
+<!-- Text Area -->
+<div class="flex-1 p-md relative group">
+<textarea class="w-full h-full resize-none border-none outline-none bg-transparent font-body-lg text-body-lg text-on-surface placeholder:text-on-surface-variant/50 focus:ring-0 p-0" placeholder="Paste your script here..."></textarea>
+<!-- Character Counter -->
+<div class="absolute bottom-md right-md font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-2 py-1 rounded">
+                                0 chars
+                            </div>
+</div>
+</div>
+</div>
+<!-- Settings Panel (Right - 4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-lg">
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg shadow-sm">
+<h3 class="font-headline-md text-headline-md font-semibold text-on-surface mb-lg flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary" data-icon="tune">tune</span>
+                            Advanced Options
+                        </h3>
+<div class="space-y-xl">
+<!-- Video Duration -->
+<div>
+<label class="block font-label-md text-label-md font-medium text-on-surface mb-sm">Target Duration</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface border border-outline-variant rounded-lg py-3 pl-4 pr-10 font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors">
+<option>Auto-detect from script</option>
+<option>Short (&lt; 1 min)</option>
+<option>Medium (1-5 mins)</option>
+<option>Long (&gt; 5 mins)</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Style Preference -->
+<div>
+<label class="block font-label-md text-label-md font-medium text-on-surface mb-md">Style Preference</label>
+<div class="grid grid-cols-1 gap-sm">
+<label class="flex items-center p-3 border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-lowest transition-colors has-[:checked]:border-secondary has-[:checked]:bg-secondary-fixed/10">
+<input class="w-4 h-4 text-secondary border-outline-variant focus:ring-secondary focus:ring-offset-surface" name="style" type="radio">
+<span class="ml-3 font-body-sm text-body-sm text-on-surface font-medium">Informative</span>
+</label>
+<label class="flex items-center p-3 border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-lowest transition-colors has-[:checked]:border-secondary has-[:checked]:bg-secondary-fixed/10">
+<input checked="" class="w-4 h-4 text-secondary border-outline-variant focus:ring-secondary focus:ring-offset-surface" name="style" type="radio">
+<span class="ml-3 font-body-sm text-body-sm text-on-surface font-medium">Balanced</span>
+</label>
+<label class="flex items-center p-3 border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-lowest transition-colors has-[:checked]:border-secondary has-[:checked]:bg-secondary-fixed/10">
+<input class="w-4 h-4 text-secondary border-outline-variant focus:ring-secondary focus:ring-offset-surface" name="style" type="radio">
+<span class="ml-3 font-body-sm text-body-sm text-on-surface font-medium">Entertaining</span>
+</label>
+</div>
+</div>
+<!-- Stock Sources -->
+<div>
+<label class="block font-label-md text-label-md font-medium text-on-surface mb-md">Stock Sources</label>
+<div class="space-y-sm">
+<label class="flex items-center cursor-pointer group">
+<input checked="" class="w-5 h-5 text-secondary border-outline-variant rounded focus:ring-secondary focus:ring-offset-surface" type="checkbox">
+<span class="ml-3 font-body-sm text-body-sm text-on-surface group-hover:text-primary transition-colors">Pexels</span>
+</label>
+<label class="flex items-center cursor-pointer group">
+<input checked="" class="w-5 h-5 text-secondary border-outline-variant rounded focus:ring-secondary focus:ring-offset-surface" type="checkbox">
+<span class="ml-3 font-body-sm text-body-sm text-on-surface group-hover:text-primary transition-colors">Pixabay</span>
+</label>
+</div>
+</div>
+<!-- Auto-segment -->
+<div class="flex items-center justify-between pt-md border-t border-outline-variant">
+<div>
+<div class="font-label-md text-label-md font-medium text-on-surface">Auto-segment Scenes</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-xs">AI will split script into logical scenes.</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value="">
+</label></div></div></div></div></div></div></main>
+<div id="proto-nav" style="position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;background:#041525;color:#fff;padding:8px 14px;border-radius:9999px;font-family:Inter,sans-serif;font-size:12px;display:flex;gap:10px;flex-wrap:wrap;max-width:92vw;box-shadow:0 4px 16px rgba(0,0,0,0.25);">
+  <a href="index.html" style="color:#b7c8dd;text-decoration:none;">Landing</a>
+  <a href="sign-up.html" style="color:#b7c8dd;text-decoration:none;">Sign Up</a>
+  <a href="log-in.html" style="color:#b7c8dd;text-decoration:none;">Log In</a>
+  <a href="dashboard.html" style="color:#b7c8dd;text-decoration:none;">Dashboard</a>
+  <a href="script-input.html" style="color:#b7c8dd;text-decoration:none;">Script</a>
+  <a href="clip-gallery.html" style="color:#b7c8dd;text-decoration:none;">Clips</a>
+  <a href="timeline-assembly.html" style="color:#b7c8dd;text-decoration:none;">Timeline</a>
+  <a href="audio-upload.html" style="color:#b7c8dd;text-decoration:none;">Audio</a>
+  <a href="export-modal.html" style="color:#b7c8dd;text-decoration:none;">Export</a>
+  <a href="video-preview-modal.html" style="color:#b7c8dd;text-decoration:none;">Preview</a>
+</div>
+</body></html>

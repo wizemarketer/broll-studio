@@ -1,0 +1,339 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>B-Roll Studio - Timeline Interface</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#4cd6fb",
+                        "on-primary-container": "#8191a5",
+                        "secondary-container": "#50d9fe",
+                        "outline": "#74777d",
+                        "tertiary": "#211100",
+                        "primary-fixed": "#d3e4fa",
+                        "primary-fixed-dim": "#b7c8dd",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#b3ebff",
+                        "inverse-surface": "#303032",
+                        "background": "#fbf9fa",
+                        "surface-bright": "#fbf9fa",
+                        "inverse-primary": "#b7c8dd",
+                        "outline-variant": "#c4c6cc",
+                        "tertiary-fixed-dim": "#e2c19e",
+                        "surface-tint": "#506072",
+                        "surface-container-high": "#eae7e9",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f5f3f4",
+                        "on-error": "#ffffff",
+                        "surface": "#fbf9fa",
+                        "secondary": "#00677d",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f2f0f1",
+                        "on-secondary-fixed": "#001f27",
+                        "surface-variant": "#e4e2e3",
+                        "on-tertiary-fixed": "#291803",
+                        "on-primary-fixed": "#0c1d2c",
+                        "on-background": "#1b1c1d",
+                        "tertiary-container": "#38250d",
+                        "on-surface-variant": "#44474c",
+                        "on-secondary-container": "#005c70",
+                        "primary-container": "#1a2a3a",
+                        "primary": "#041525",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e4e2e3",
+                        "on-surface": "#1b1c1d",
+                        "on-tertiary-container": "#a88b6b",
+                        "surface-container": "#efedef",
+                        "on-tertiary-fixed-variant": "#594328",
+                        "on-primary-fixed-variant": "#384859",
+                        "surface-dim": "#dbd9db",
+                        "on-secondary-fixed-variant": "#004e5f",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#ffddb9",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "gutter": "16px",
+                        "margin": "24px",
+                        "xs": "4px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-xl-mobile": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-xl-mobile": ["28px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-xl": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .waveform {
+            background-image: repeating-linear-gradient(90deg, transparent, transparent 2px, #00B4D8 2px, #00B4D8 4px);
+            background-size: 8px 100%;
+        }
+        .playhead-glow {
+            box-shadow: 0 0 12px 2px rgba(220, 38, 38, 0.5); /* Coral/Red playhead glow */
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-lg text-body-lg h-screen flex flex-col overflow-hidden">
+<!-- TopNavBar -->
+<header class="sticky top-0 w-full z-50 flex justify-between items-center px-lg h-16 bg-surface border-b border-outline-variant docked full-width top-0">
+<div class="flex items-center gap-lg">
+<span class="font-headline-lg text-headline-lg font-bold text-primary">B-Roll Studio</span>
+<nav class="hidden md:flex items-center gap-md">
+<a class="text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors px-3 py-2 rounded-md font-label-md text-label-md" href="#">Dashboard</a>
+<a class="text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors px-3 py-2 rounded-md font-label-md text-label-md" href="#">Gallery</a>
+<a class="text-secondary border-b-2 border-secondary pb-1 px-3 py-2 font-label-md text-label-md hover:bg-surface-container transition-colors" href="#">Editor</a>
+<a class="text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors px-3 py-2 rounded-md font-label-md text-label-md" href="#">Assets</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button class="bg-primary text-on-primary hover:bg-primary-container transition-colors px-4 py-2 rounded-lg font-label-md text-label-md">New Project</button>
+<button class="text-on-surface-variant hover:text-primary p-2 rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary p-2 rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant ml-2">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A professional headshot of a creative video editor in a modern studio environment. The lighting is soft and flattering, highlighting a focused expression. High resolution and clean aesthetic suitable for an app avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuALtzE231ZFFuW8KQLZIFEs9bg13i4v2ENVJPdswPRrm8pMC19q2g9aixV4klkbY3VVkuex9qjRIpRv4IdsIznYwn9wwu0QZbYTmApQ1X0F37n8-DzkoKlmfPRddxRswNaa1uh4M2sWBRd5MyObAl9fhWa3wC0hTFSnArp1S439Mm4zwyTNye7fnhpsoOwAOMww8WpdaPxCGlpm0BgyoC6mX3SZlW93YS5ogYCnvS_PI8TuhbIOBD8-5Mmnv2X-UEJwLa0RHkoY3pI">
+</div>
+</div>
+</header>
+<!-- Main Workspace -->
+<main class="flex-1 flex overflow-hidden">
+<!-- Left Panel: Script Track / Structure -->
+<aside class="w-[280px] bg-surface-container-low border-r border-outline-variant flex flex-col h-full flex-shrink-0">
+<div class="p-md border-b border-outline-variant bg-surface-container flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-primary">Script Outline</h2>
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">add</span></button>
+</div>
+<div class="flex-1 overflow-y-auto p-md space-y-sm">
+<!-- Script Segment - Active -->
+<div class="bg-secondary-container text-on-secondary-container rounded-lg p-3 border-l-4 border-secondary cursor-pointer hover:bg-surface-container-highest transition-all transform hover:translate-x-1 duration-200">
+<div class="flex justify-between items-start mb-1">
+<span class="font-label-md text-label-md font-bold">Segment 1</span>
+<span class="font-label-sm text-label-sm opacity-70">00:00</span>
+</div>
+<p class="font-body-sm text-body-sm line-clamp-2">"The Amazon Rainforest is home to incredible biodiversity, including the vibrant Macaw."</p>
+</div>
+<!-- Script Segment - Inactive -->
+<div class="bg-surface text-on-surface-variant rounded-lg p-3 border border-outline-variant cursor-pointer hover:bg-surface-container-high transition-all">
+<div class="flex justify-between items-start mb-1">
+<span class="font-label-md text-label-md">Segment 2</span>
+<span class="font-label-sm text-label-sm opacity-70">00:15</span>
+</div>
+<p class="font-body-sm text-body-sm line-clamp-2">"These birds are known for their striking colors and intelligence."</p>
+</div>
+<!-- Script Segment - Inactive -->
+<div class="bg-surface text-on-surface-variant rounded-lg p-3 border border-outline-variant cursor-pointer hover:bg-surface-container-high transition-all">
+<div class="flex justify-between items-start mb-1">
+<span class="font-label-md text-label-md">Segment 3</span>
+<span class="font-label-sm text-label-sm opacity-70">00:30</span>
+</div>
+<p class="font-body-sm text-body-sm line-clamp-2">"Conservation efforts are vital to protect their natural habitat."</p>
+</div>
+</div>
+</aside>
+<!-- Center: Main Timeline & Preview Area -->
+<section class="flex-1 flex flex-col min-w-0 bg-inverse-surface text-on-secondary relative">
+<!-- Video Preview Area (Top half) -->
+<div class="flex-1 p-lg flex flex-col items-center justify-center border-b border-outline">
+<div class="w-full max-w-4xl aspect-video bg-black rounded-lg shadow-2xl relative overflow-hidden group border border-surface-tint">
+<img alt="Preview Video" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity" data-alt="High quality, cinematic footage of a brilliant scarlet macaw perched on a branch in a lush, dense Amazon rainforest. Sunlight dapples through the canopy, creating a dramatic, professional documentary look. Sharp focus on the bird." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDi7RUIDr5qS3MNxPDlkaXqZACMH0WKNGlc4YQHryucwszqvH-5kIovw2xgDWhPcmbf6dmHi04JTbb5ZL_YzZwMfwwE8qlA-DpWRVSxxP5rmw63rwiA8O3Cxgc6jR_XovaDo0QHceY_U05oRVaScniPNmkmDf72_LbSADHE3ZTG2tzZqgo9ICGGeTVNk0dLapeFP25sv6FQpm9YBE2wVXMjxgvVHvJptZ8WjxRNZDrQyzRT9xM2Ur-tkBrcgwdhJZkTXHeC694XoOw">
+<!-- Overlay Controls (Hidden until hover) -->
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-md">
+<div class="w-full flex items-center justify-between text-white">
+<span class="font-label-sm text-label-sm">00:08 / 00:15</span>
+<div class="flex gap-2">
+<button class="hover:text-[#50d9fe]"><span class="material-symbols-outlined">volume_up</span></button>
+<button class="hover:text-[#50d9fe]"><span class="material-symbols-outlined">fullscreen</span></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Timeline Toolbar -->
+<div class="h-14 bg-surface-container-low border-b border-outline-variant flex items-center justify-between px-md flex-shrink-0">
+<div class="flex items-center gap-xs">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-highest hover:text-primary transition-colors"><span class="material-symbols-outlined">skip_previous</span></button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary hover:bg-primary-container transition-colors shadow-sm"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span></button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-highest hover:text-primary transition-colors"><span class="material-symbols-outlined">stop</span></button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-highest hover:text-primary transition-colors"><span class="material-symbols-outlined">skip_next</span></button>
+</div>
+<div class="flex items-center gap-md">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">zoom_out</span>
+<input class="w-24 h-1 bg-outline-variant rounded-lg appearance-none cursor-pointer accent-[#00B4D8]" max="100" min="1" type="range" value="50">
+<span class="material-symbols-outlined text-sm">zoom_in</span>
+</div>
+<div class="h-6 w-px bg-outline-variant mx-2"></div>
+<button class="px-4 py-2 bg-secondary text-white rounded-lg font-label-md text-label-md hover:bg-secondary-container hover:text-on-secondary-container transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">preview</span> Preview
+                    </button>
+<button class="px-4 py-2 border border-primary text-primary hover:bg-surface-container rounded-lg font-label-md text-label-md transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">download</span> Export
+                    </button>
+</div>
+</div>
+<!-- Timeline Tracks Area -->
+<div class="h-64 bg-[#1a1a1a] flex flex-col relative overflow-hidden flex-shrink-0 border-t border-surface-tint">
+<!-- Time Ruler -->
+<div class="h-6 bg-[#252525] border-b border-[#333] flex items-end px-4 text-[#888] font-label-sm text-label-sm relative overflow-hidden">
+<div class="flex-1 flex justify-between absolute inset-x-4">
+<span>00:00</span><span>00:05</span><span>00:10</span><span>00:15</span><span>00:20</span><span>00:25</span>
+</div>
+</div>
+<!-- Tracks Container -->
+<div class="flex-1 overflow-x-auto relative">
+<div class="w-[150%] h-full relative pl-4"> <!-- Simulated scroll width -->
+<!-- Playhead -->
+<div class="absolute top-0 bottom-0 left-[20%] w-px bg-red-500 z-20 playhead-glow">
+<div class="w-3 h-3 bg-red-500 transform rotate-45 -translate-x-[5px] -translate-y-1"></div>
+</div>
+<!-- Track 1: Script/Voiceover -->
+<div class="h-16 border-b border-[#333] flex items-center relative group">
+<div class="absolute left-0 w-24 h-full bg-[#1a1a1a] border-r border-[#333] flex items-center px-2 text-[#aaa] font-label-sm text-label-sm z-10 opacity-80 group-hover:opacity-100 transition-opacity">Script</div>
+<div class="ml-28 h-10 w-[30%] bg-primary-container border border-[#3a4a5a] rounded-md flex items-center px-3 cursor-pointer hover:brightness-110 transition-all text-white shadow-sm">
+<span class="material-symbols-outlined text-sm mr-2 opacity-70 text-[#50d9fe]">description</span>
+<span class="font-body-sm text-body-sm truncate text-[#e2c19e]">Seg 1: The Amazon Rainforest...</span>
+</div>
+<div class="ml-4 h-10 w-[20%] bg-[#223344] border border-[#3a4a5a] rounded-md flex items-center px-3 cursor-pointer hover:brightness-110 transition-all text-white/70 shadow-sm">
+<span class="font-body-sm text-body-sm truncate">Seg 2: These birds...</span>
+</div>
+</div>
+<!-- Track 2: B-Roll Video -->
+<div class="h-20 border-b border-[#333] flex items-center relative group">
+<div class="absolute left-0 w-24 h-full bg-[#1a1a1a] border-r border-[#333] flex items-center px-2 text-[#aaa] font-label-sm text-label-sm z-10 opacity-80 group-hover:opacity-100 transition-opacity">B-Roll</div>
+<div class="ml-28 h-16 w-[15%] bg-[#333] rounded-md border border-[#555] overflow-hidden flex items-center justify-center cursor-pointer relative group/clip">
+<img alt="Rainforest Clip" class="w-full h-full object-cover opacity-60" data-alt="Cinematic drone shot soaring over the dense, misty canopy of the Amazon rainforest at sunrise. Golden hour lighting, lush green foliage stretching to the horizon. High resolution, professional documentary style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5aBLU1QQEeaX9Vu1P2sN4HNhQRZ0Eg_W_7IubCpqd7wr3F9uiuFl7mSzyP3wBAuAQ5mtNK2RdQIJ6m5Y8tl9xFqxSHmne74QP_mLKArC5puQ6NpXrv7XIF9PCygPRjph61nQsKEkeTVszh4iHYwXGDbY0_ZrsHuui-fI_OjjedCvW7vTDWDNiQDjAiVoRDqF-hMCoXwX4hhrjpUAseldPINk0hwXinuLMD2R3wUAQ28zWql0HE7e-pcOXyArP2ZHYk9a4aoePwIQ">
+<div class="absolute inset-0 border-2 border-transparent group-hover/clip:border-white transition-colors rounded-md"></div>
+</div>
+<!-- Active Clip -->
+<div class="ml-1 h-16 w-[25%] bg-[#333] rounded-md border-2 border-[#50d9fe] overflow-hidden flex items-center justify-center cursor-pointer relative group/clip z-10 shadow-[0_0_8px_rgba(80,217,254,0.3)]">
+<div class="absolute left-0 top-0 bottom-0 w-2 bg-[#50d9fe]/20 cursor-ew-resize hover:bg-[#50d9fe] transition-colors"></div>
+<div class="absolute right-0 top-0 bottom-0 w-2 bg-[#50d9fe]/20 cursor-ew-resize hover:bg-[#50d9fe] transition-colors"></div>
+<img alt="Macaw Clip" class="w-full h-full object-cover opacity-80" data-alt="Close up video still of a scarlet macaw eating a nut on a branch. Sharp details on the feathers, vibrant reds and blues, soft blurred green background. High definition professional wildlife photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6FNgTy9qUXMOE38mlOkAxXQKR1D5ag7I5Nzc6FMnSDyfyEENwJTm4c9ifJrR8MPpOP0BHjFVQLcDf5Mg2nkifv2zfHH6o0YqARV-e0ztQRj3ZUilyIIK1L-squykPkhFVKxoZzpfblUfw038-rXIGWaRdW5HKy_mNqLOLUjy7396xxgeXepDDN1GXZW3bgyQ2akQaVzjD6h0GF12VREdoZWZaS5-xof1hIt0iKm7NafXpAez-j51PaZPwpECRZU60GvQCDAb_X5s">
+<span class="absolute bottom-1 left-1 bg-black/70 text-white font-label-sm text-[10px] px-1 rounded">Macaw_01.mp4</span>
+</div>
+</div>
+<!-- Track 3: Audio -->
+<div class="h-16 flex items-center relative group">
+<div class="absolute left-0 w-24 h-full bg-[#1a1a1a] border-r border-[#333] flex items-center px-2 text-[#aaa] font-label-sm text-label-sm z-10 opacity-80 group-hover:opacity-100 transition-opacity">Audio</div>
+<div class="ml-28 h-10 w-[55%] bg-[#112233] rounded-md border border-[#2a3a4a] overflow-hidden relative opacity-80">
+<div class="absolute inset-0 waveform opacity-60"></div>
+<div class="absolute bottom-1 right-2 text-[#50d9fe] font-label-sm text-[10px]">Ambient_Jungle.wav</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Panel: Properties (Optional Drawer) -->
+<aside class="w-[280px] bg-surface-container-low border-l border-outline-variant flex flex-col h-full flex-shrink-0 hidden xl:flex">
+<div class="p-md border-b border-outline-variant bg-surface-container">
+<h2 class="font-headline-md text-headline-md text-primary">Properties</h2>
+</div>
+<div class="p-md space-y-lg overflow-y-auto">
+<div>
+<h3 class="font-label-md text-label-md text-on-surface-variant mb-2 uppercase tracking-wider">Selected Clip</h3>
+<div class="bg-surface border border-outline-variant rounded-lg p-3">
+<div class="aspect-video bg-black rounded mb-2 overflow-hidden">
+<img alt="Macaw Clip Preview" class="w-full h-full object-cover" data-alt="Close up video still of a scarlet macaw eating a nut on a branch. Sharp details on the feathers, vibrant reds and blues, soft blurred green background. High definition professional wildlife photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtXba2Pp0ntjsbtDc7_f7iLux7MXsiupukuhfLrfMs5UDifO_3nXeA_9h9fz0NCkdrQo4ys3jvoge8XAhZ6m8F09IsAIwKDLSUury1vl3AZFrXe0Y1Fy6rGhERzEViZ6xWJho62c72et4Q31lBh_K7fUtn6nemohZfjJdXQhDKRIxWnsWS2yHRRcMUkyZsJb_9he9RFYVOor4bE-VmB08Jqp-zrdRUVU8u3MVt0XBEJnmHI2iHmKZ3qMjtgpYj_dcq0KgSapaO1NE">
+</div>
+<p class="font-body-sm text-body-sm font-semibold truncate mb-1">Macaw_CloseUp_01.mp4</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Source: Internal Library</p>
+</div>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface-variant mb-2 uppercase tracking-wider">Transform</h3>
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface">Scale</span>
+<input class="w-16 p-1 text-center font-body-sm text-body-sm border border-outline-variant rounded bg-surface text-on-surface" type="text" value="100%">
+</div>
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface">Opacity</span>
+<input class="w-16 p-1 text-center font-body-sm text-body-sm border border-outline-variant rounded bg-surface text-on-surface" type="text" value="100%">
+</div>
+</div>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface-variant mb-2 uppercase tracking-wider">Timing</h3>
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface">Duration</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">00:00:12:00</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface">In Point</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">00:00:08:15</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</main>
+<!-- Bottom Status Bar -->
+<footer class="h-8 bg-surface-container border-t border-outline-variant flex items-center justify-between px-md flex-shrink-0 z-10">
+<div class="flex items-center gap-4 text-on-surface-variant font-label-sm text-label-sm">
+<span>Project: Nature Vlog #42</span>
+<span>|</span>
+<span>12 Clips Placed</span>
+</div>
+<div class="text-on-surface-variant font-label-sm text-label-sm font-semibold">
+            Total Duration: 04:42
+        </div>
+</footer>
+
+<div id="proto-nav" style="position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;background:#041525;color:#fff;padding:8px 14px;border-radius:9999px;font-family:Inter,sans-serif;font-size:12px;display:flex;gap:10px;flex-wrap:wrap;max-width:92vw;box-shadow:0 4px 16px rgba(0,0,0,0.25);">
+  <a href="index.html" style="color:#b7c8dd;text-decoration:none;">Landing</a>
+  <a href="sign-up.html" style="color:#b7c8dd;text-decoration:none;">Sign Up</a>
+  <a href="log-in.html" style="color:#b7c8dd;text-decoration:none;">Log In</a>
+  <a href="dashboard.html" style="color:#b7c8dd;text-decoration:none;">Dashboard</a>
+  <a href="script-input.html" style="color:#b7c8dd;text-decoration:none;">Script</a>
+  <a href="clip-gallery.html" style="color:#b7c8dd;text-decoration:none;">Clips</a>
+  <a href="timeline-assembly.html" style="color:#b7c8dd;text-decoration:none;">Timeline</a>
+  <a href="audio-upload.html" style="color:#b7c8dd;text-decoration:none;">Audio</a>
+  <a href="export-modal.html" style="color:#b7c8dd;text-decoration:none;">Export</a>
+  <a href="video-preview-modal.html" style="color:#b7c8dd;text-decoration:none;">Preview</a>
+</div>
+</body></html>

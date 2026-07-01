@@ -1,0 +1,406 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>B-Roll Studio - Clip Gallery</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary": "#ffffff",
+                      "on-secondary-fixed": "#001f27",
+                      "secondary-fixed": "#b3ebff",
+                      "surface-container-highest": "#e4e2e3",
+                      "on-surface": "#1b1c1d",
+                      "inverse-primary": "#b7c8dd",
+                      "surface-container": "#efedef",
+                      "secondary": "#00677d",
+                      "on-tertiary-container": "#a88b6b",
+                      "primary-fixed": "#d3e4fa",
+                      "on-tertiary-fixed-variant": "#594328",
+                      "on-primary-container": "#8191a5",
+                      "on-surface-variant": "#44474c",
+                      "surface-dim": "#dbd9db",
+                      "on-secondary": "#ffffff",
+                      "error": "#ba1a1a",
+                      "secondary-container": "#50d9fe",
+                      "surface-tint": "#506072",
+                      "surface-variant": "#e4e2e3",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-fixed": "#ffddb9",
+                      "inverse-on-surface": "#f2f0f1",
+                      "on-secondary-fixed-variant": "#004e5f",
+                      "tertiary": "#211100",
+                      "on-primary-fixed-variant": "#384859",
+                      "on-background": "#1b1c1d",
+                      "primary-container": "#1a2a3a",
+                      "surface-container-high": "#eae7e9",
+                      "tertiary-container": "#38250d",
+                      "primary-fixed-dim": "#b7c8dd",
+                      "background": "#fbf9fa",
+                      "on-error": "#ffffff",
+                      "primary": "#041525",
+                      "surface-bright": "#fbf9fa",
+                      "on-primary-fixed": "#0c1d2c",
+                      "surface-container-lowest": "#ffffff",
+                      "surface": "#fbf9fa",
+                      "outline-variant": "#c4c6cc",
+                      "on-secondary-container": "#005c70",
+                      "error-container": "#ffdad6",
+                      "on-error-container": "#93000a",
+                      "tertiary-fixed-dim": "#e2c19e",
+                      "outline": "#74777d",
+                      "surface-container-low": "#f5f3f4",
+                      "secondary-fixed-dim": "#4cd6fb",
+                      "inverse-surface": "#303032",
+                      "on-tertiary-fixed": "#291803"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "lg": "24px",
+                      "sm": "8px",
+                      "xl": "32px",
+                      "margin": "24px",
+                      "md": "16px",
+                      "base": "8px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Inter"],
+                      "headline-xl": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "headline-xl-mobile": ["Inter"]
+              },
+              "fontSize": {
+                      "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-xl": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-sm": ["12px", {"lineHeight": "1", "fontWeight": "500"}],
+                      "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                      "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-lg": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "headline-xl-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface h-screen overflow-hidden flex flex-col font-body-lg antialiased">
+<!-- TopNavBar -->
+<nav class="sticky top-0 w-full z-50 flex justify-between items-center px-lg h-16 bg-surface border-b border-outline-variant flex-shrink-0">
+<div class="flex items-center gap-xl">
+<span class="font-headline-lg text-headline-lg font-bold text-primary">B-Roll Studio</span>
+<div class="hidden md:flex items-center gap-lg font-body-lg text-body-lg">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-secondary border-b-2 border-secondary pb-1 flex items-center h-16 transition-colors" href="#">Gallery</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Editor</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Assets</a>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="hidden md:flex bg-surface-container rounded-full px-sm py-xs items-center border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] px-xs">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm w-48 text-on-surface placeholder:text-on-surface-variant" placeholder="Search..." type="text">
+</div>
+<button class="text-on-surface-variant hover:bg-surface-container-highest p-sm rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-highest p-sm rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-md py-sm rounded-lg hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors">New Project</button>
+<img alt="User profile" class="w-8 h-8 rounded-full border border-outline-variant ml-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeembFT2izSNL0IQQzp1NndFEt3kBXOdWgvUPv_sNqgHINTIfGAVR8FGdIZCt4mx3K3tSin0Xre7UBEe4fNVWqzhH3Vngd0A2aHxsclNW8Vl0JLgIzCbaijF6ddyk02DDiqg3o9zIam_jWDa-F3Ewvrf8oVNkWOMvGFc5KmpI_jocPIG68iIfjiC8H-h2qPdCpE-rUd-crVdLGY1aKKOr0_rqZLKev23CQ1d9jmyiASzKJkUBRBxcwKWv7Z0L0Ric0gG8qvw-qkAw">
+</div>
+</nav>
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col fixed left-0 top-16 h-[calc(100vh-64px)] w-72 p-md z-40 bg-surface-container-low border-r border-outline-variant flex-shrink-0">
+<div class="mb-xl px-sm">
+<div class="flex items-center gap-sm mb-xs">
+<div class="w-8 h-8 bg-primary rounded flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[18px]">movie</span>
+</div>
+<div>
+<h2 class="font-label-md text-label-md text-on-surface">Current Project</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate w-48">Vlog #42 - Edited</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-xs font-label-md text-label-md text-on-surface-variant">
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="folder">folder</span>
+                    All Projects
+                </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+                    Shared
+                </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="archive">archive</span>
+                    Archived
+                </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard_customize">dashboard_customize</span>
+                    Templates
+                </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg bg-secondary-container text-on-secondary-container font-bold transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="video_library">video_library</span>
+                    Library
+                </a>
+</nav>
+<div class="mt-auto flex flex-col gap-sm pt-lg border-t border-outline-variant">
+<button class="w-full bg-surface-container-highest text-primary font-label-md text-label-md py-sm rounded-lg hover:bg-surface-variant transition-colors border border-outline-variant">
+                    Upgrade to Pro
+                </button>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="help">help</span>
+                    Help
+                </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="rate_review">rate_review</span>
+                    Feedback
+                </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-72 flex flex-col h-full bg-surface overflow-hidden relative">
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-lg md:p-xl flex flex-col gap-xl pb-32">
+<!-- Inner Header -->
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-md border-b border-outline-variant pb-md">
+<div>
+<h1 class="font-headline-xl text-headline-xl text-primary mb-xs">Nature Vlog #42</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Clip Generation Gallery</p>
+</div>
+<div class="bg-surface-container border border-outline-variant rounded-full px-md py-sm inline-flex items-center gap-sm self-start md:self-auto shadow-sm">
+<span class="material-symbols-outlined text-secondary text-[18px]">segment</span>
+<span class="font-label-md text-label-md text-on-surface">Segment 1 of 5</span>
+<button class="ml-sm text-on-surface-variant hover:text-primary transition-colors flex items-center">
+<span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+</div>
+</header>
+<!-- Top Section: Script Text -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-[0_2px_12px_rgba(26,42,58,0.04)] relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-secondary"></div>
+<div class="flex items-center gap-sm mb-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">format_quote</span>
+<h3 class="font-label-md text-label-md uppercase tracking-wider text-xs">Current Script Segment</h3>
+</div>
+<p class="font-headline-md text-headline-md text-on-surface leading-relaxed max-w-4xl">
+                        "The dense canopy of the <span class="bg-secondary-fixed text-on-secondary-fixed px-xs rounded cursor-pointer hover:bg-secondary-fixed-dim transition-colors">Amazon rainforest</span> is home to an incredible array of wildlife. From the vibrant plumage of <span class="bg-secondary-fixed text-on-secondary-fixed px-xs rounded cursor-pointer hover:bg-secondary-fixed-dim transition-colors">macaws</span> soaring overhead, to the silent predators moving through the undergrowth, every layer vibrates with life."
+                    </p>
+<div class="mt-md flex gap-sm">
+<div class="inline-flex items-center gap-xs bg-surface-container-highest px-sm py-xs rounded-full font-label-sm text-label-sm text-on-surface-variant border border-outline-variant">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+                            AI Keywords extracted
+                        </div>
+</div>
+</section>
+<!-- Main Section: Clip Grid -->
+<section>
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-headline-md text-headline-md text-primary">Suggested Clips</h3>
+<div class="flex gap-sm">
+<button class="border border-outline-variant bg-surface-container-lowest p-sm rounded-lg text-on-surface-variant hover:text-primary transition-colors flex items-center">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+</button>
+<button class="border border-outline-variant bg-surface-container-lowest p-sm rounded-lg text-on-surface-variant hover:text-primary transition-colors flex items-center">
+<span class="material-symbols-outlined text-[18px]">grid_view</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-md">
+<!-- Clip Card 1 -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden flex flex-col group hover:shadow-[0_4px_20px_rgba(26,42,58,0.08)] hover:border-outline transition-all duration-300">
+<div class="w-full aspect-video relative bg-surface-variant overflow-hidden cursor-pointer">
+<img class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" data-alt="A high-quality, cinematic close-up shot of a vibrant red-and-blue macaw perched on a mossy branch in the dense Amazon rainforest. Sunlight filters beautifully through the lush, green canopy, creating dynamic dappled lighting. The image embodies a professional, modern documentary style, with sharp focus on the bird and a softly blurred background. The overall aesthetic is bright, clear, and perfectly suited for a high-end light-mode video editing interface, emphasizing rich natural colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvHj0o8zx9ZvVOQ6_akvk0MyZnm8Ue8P1uX9IqkXKlMUx-4GusYNbQ1_0hBmKqMQcu_H-m7Z8vFwdbdFRf9ind9I4XsOHzSpF-pM_GQ2PjxNUVqpT9-QRv2aZxd5yRrBcgpjeRSuOBZ00rsD4W7R758fcbkMHSd95-cNMpGLJrvi5fDZ2ZGZkdY5Y9VgmN06JonBIH2JCyw1rZ1Z0gyiy_OZZ-olvMDKfIh4qf7cjCo44PyjYqVP105G5pwviDKIHafRIplKVYPEs">
+<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300"></div>
+<div class="absolute top-sm left-sm bg-primary/90 backdrop-blur-sm text-on-primary font-label-sm text-[10px] px-2 py-0.5 rounded-full border border-white/20">
+                                    Pexels
+                                </div>
+<div class="absolute bottom-sm right-sm bg-surface/90 backdrop-blur-sm text-on-surface font-label-sm text-[10px] px-1.5 py-0.5 rounded shadow-sm">
+                                    00:12
+                                </div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<div class="w-12 h-12 bg-surface/80 backdrop-blur-md rounded-full flex items-center justify-center text-primary shadow-lg transform scale-90 group-hover:scale-100 transition-transform duration-300">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="p-md flex flex-col gap-sm border-t border-outline-variant">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Relevance</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold">98%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[98%] rounded-full"></div>
+</div>
+<div class="mt-xs flex items-center justify-between">
+<button class="text-on-surface-variant hover:text-primary font-label-md text-label-md flex items-center gap-xs transition-colors">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+                                        Preview
+                                    </button>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-secondary hover:text-on-secondary transition-colors border border-outline-variant hover:border-secondary">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Clip Card 2 -->
+<article class="bg-surface-container-lowest rounded-xl border border-secondary border-2 overflow-hidden flex flex-col group hover:shadow-[0_4px_20px_rgba(26,42,58,0.08)] transition-all duration-300 relative shadow-sm">
+<!-- Selected indicator -->
+<div class="absolute top-sm right-sm z-10 bg-secondary text-on-secondary w-6 h-6 rounded-full flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="w-full aspect-video relative bg-surface-variant overflow-hidden cursor-pointer">
+<img class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" data-alt="A sweeping aerial drone shot of the winding Amazon river cutting through an endless expanse of vibrant green rainforest canopy. The lighting is bright and clear, reflecting a sunny day with soft, natural contrast. The water reflects the bright blue sky. This cinematic footage style fits seamlessly into a modern, corporate video editing software context, serving as premium b-roll. The visual tone is expansive, crisp, and aligns with a clean light-mode UI design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVfE41SklB-LKzdOXHZTXqB5uCHtC2uHJvpkCOn1fT2KsD2cjTkL2oWldk99OESUd3V_GqQmMjeSISN3SYfu9MT336MZfmGC9YAdM6JIYq7KhRGZ5ixmV4aPZy3DIaFDMyu4joJZKasGaVTstV5gYuTe7EGvedLYk9OoArb3APRC6b_kM_K6vgm8_XbsJb3fVuwQN07mdmL38wjLsFC2uQ-Gc1dB3N2aFd5TF_uArDc5G21KhR0Mtv-q4XaelfoYCwpcOpgCxYbVI">
+<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300"></div>
+<div class="absolute top-sm left-sm bg-primary/90 backdrop-blur-sm text-on-primary font-label-sm text-[10px] px-2 py-0.5 rounded-full border border-white/20">
+                                    Envato
+                                </div>
+<div class="absolute bottom-sm right-sm bg-surface/90 backdrop-blur-sm text-on-surface font-label-sm text-[10px] px-1.5 py-0.5 rounded shadow-sm">
+                                    00:18
+                                </div>
+</div>
+<div class="p-md flex flex-col gap-sm border-t border-outline-variant bg-secondary-fixed/20">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Relevance</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold">92%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[92%] rounded-full"></div>
+</div>
+<div class="mt-xs flex items-center justify-between">
+<button class="text-on-surface-variant hover:text-primary font-label-md text-label-md flex items-center gap-xs transition-colors">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+                                        Preview
+                                    </button>
+<button class="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center hover:bg-secondary-container hover:text-on-secondary-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">remove</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Clip Card 3 -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden flex flex-col group hover:shadow-[0_4px_20px_rgba(26,42,58,0.08)] hover:border-outline transition-all duration-300">
+<div class="w-full aspect-video relative bg-surface-variant overflow-hidden cursor-pointer">
+<img class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" data-alt="A meticulously composed tracking shot moving slowly through the dense undergrowth of a tropical rainforest. Huge, waxy green leaves dominate the foreground, with rays of crisp, bright light piercing through the gaps to illuminate patches of mossy bark. The visual aesthetic is highly professional, sharply focused, and ideal for a modern light-mode documentary project. The atmosphere is serene, emphasizing natural textures and vibrant, healthy plant life." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOJjt1uBX3GMNuZQLmAHvMk8PhHMO-nO9TJ9vMk9l_0MQr7R7QTA6sP5_aIAaJjmeSc6yMKoFepZQG08UlE16EkjxTTbE0MPvqoGkn3hrM-yGJqQr8lekWZgukERTJgjNeKkxtg3axmEWFgMggUNWLmyw8D8yABVGbCn-FKQOSMUQ4bRihXqFOp-IKbB9tmU7eLwagAk7K-3jvDTW8h6MD0maeI15REzjTsCPgB46I8hvBjT0xLfKYn1tOzopjeJwEPgb0KLqTP7A">
+<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300"></div>
+<div class="absolute top-sm left-sm bg-primary/90 backdrop-blur-sm text-on-primary font-label-sm text-[10px] px-2 py-0.5 rounded-full border border-white/20">
+                                    Pexels
+                                </div>
+<div class="absolute bottom-sm right-sm bg-surface/90 backdrop-blur-sm text-on-surface font-label-sm text-[10px] px-1.5 py-0.5 rounded shadow-sm">
+                                    00:08
+                                </div>
+</div>
+<div class="p-md flex flex-col gap-sm border-t border-outline-variant">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Relevance</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold">85%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[85%] rounded-full opacity-80"></div>
+</div>
+<div class="mt-xs flex items-center justify-between">
+<button class="text-on-surface-variant hover:text-primary font-label-md text-label-md flex items-center gap-xs transition-colors">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+                                        Preview
+                                    </button>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-secondary hover:text-on-secondary transition-colors border border-outline-variant hover:border-secondary">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Clip Card 4 -->
+<article class="bg-surface-container-lowest rounded-xl border border-secondary border-2 overflow-hidden flex flex-col group hover:shadow-[0_4px_20px_rgba(26,42,58,0.08)] transition-all duration-300 relative shadow-sm">
+<!-- Selected indicator -->
+<div class="absolute top-sm right-sm z-10 bg-secondary text-on-secondary w-6 h-6 rounded-full flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="w-full aspect-video relative bg-surface-variant overflow-hidden cursor-pointer">
+<img class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" data-alt="A breathtaking time-lapse shot of rolling white clouds moving quickly over an expansive, undulating green rainforest canopy. The sky is a bright, clear cyan, and the sunlight creates shifting patterns of light and shadow across the treetops. The footage feels expansive, premium, and perfectly color-graded for a corporate or high-end nature documentary. It integrates beautifully with a minimalist, light-mode interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDKE5uXV97QqZdkgh_b20XD1TO5VmTPjq99g7xiVQdMJHtRpHHfzxdpgcvEap08vLyPlGBtNXnNg5EBFxLbed338FokPhkFAzq39VKH3HTJSXtbuRJMo6C5u4tZcWIkEouannGimCnyUs1eDahvNruPIESOtgkKiiHWIEnogDVy0AsMlpC1MCQcK5GhVLUL_J3zCjYrK0IUFOZ_ZoDCwauB98qlDU8Q9BoMpC4waiTp2c_7RWlOZYjid7I7JxZLlK4c4lVQZRsKw8">
+<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300"></div>
+<div class="absolute top-sm left-sm bg-primary/90 backdrop-blur-sm text-on-primary font-label-sm text-[10px] px-2 py-0.5 rounded-full border border-white/20">
+                                    Artgrid
+                                </div>
+<div class="absolute bottom-sm right-sm bg-surface/90 backdrop-blur-sm text-on-surface font-label-sm text-[10px] px-1.5 py-0.5 rounded shadow-sm">
+                                    00:24
+                                </div>
+</div>
+<div class="p-md flex flex-col gap-sm border-t border-outline-variant bg-secondary-fixed/20">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Relevance</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold">78%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[78%] rounded-full opacity-60"></div>
+</div>
+<div class="mt-xs flex items-center justify-between">
+<button class="text-on-surface-variant hover:text-primary font-label-md text-label-md flex items-center gap-xs transition-colors">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+                                        Preview
+                                    </button>
+<button class="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center hover:bg-secondary-container hover:text-on-secondary-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">remove</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+</section>
+</div>
+<!-- Bottom Floating Action Bar -->
+<div class="absolute bottom-0 left-0 w-full border-t border-outline-variant bg-surface/80 backdrop-blur-md px-xl py-md flex justify-between items-center z-20 shadow-[0_-4px_20px_rgba(26,42,58,0.05)]">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 bg-secondary-container rounded-full flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[20px]">movie_filter</span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-bold block">3 clips selected</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">Total duration: 00:44</span>
+</div>
+</div>
+<button class="bg-secondary text-on-secondary font-label-md text-label-md px-xl py-3 rounded-lg hover:bg-secondary-container hover:text-on-secondary-container transition-colors flex items-center gap-sm shadow-md hover:shadow-lg">
+                    Continue to Timeline Assembly
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</main>
+</div>
+
+<div id="proto-nav" style="position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;background:#041525;color:#fff;padding:8px 14px;border-radius:9999px;font-family:Inter,sans-serif;font-size:12px;display:flex;gap:10px;flex-wrap:wrap;max-width:92vw;box-shadow:0 4px 16px rgba(0,0,0,0.25);">
+  <a href="index.html" style="color:#b7c8dd;text-decoration:none;">Landing</a>
+  <a href="sign-up.html" style="color:#b7c8dd;text-decoration:none;">Sign Up</a>
+  <a href="log-in.html" style="color:#b7c8dd;text-decoration:none;">Log In</a>
+  <a href="dashboard.html" style="color:#b7c8dd;text-decoration:none;">Dashboard</a>
+  <a href="script-input.html" style="color:#b7c8dd;text-decoration:none;">Script</a>
+  <a href="clip-gallery.html" style="color:#b7c8dd;text-decoration:none;">Clips</a>
+  <a href="timeline-assembly.html" style="color:#b7c8dd;text-decoration:none;">Timeline</a>
+  <a href="audio-upload.html" style="color:#b7c8dd;text-decoration:none;">Audio</a>
+  <a href="export-modal.html" style="color:#b7c8dd;text-decoration:none;">Export</a>
+  <a href="video-preview-modal.html" style="color:#b7c8dd;text-decoration:none;">Preview</a>
+</div>
+</body></html>

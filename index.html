@@ -1,0 +1,259 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>B-Roll Studio - Turn Your Script into a Video in Minutes</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#001f27",
+                        "secondary-fixed": "#b3ebff",
+                        "surface-container-highest": "#e4e2e3",
+                        "on-surface": "#1b1c1d",
+                        "inverse-primary": "#b7c8dd",
+                        "surface-container": "#efedef",
+                        "secondary": "#00677d",
+                        "on-tertiary-container": "#a88b6b",
+                        "primary-fixed": "#d3e4fa",
+                        "on-tertiary-fixed-variant": "#594328",
+                        "on-primary-container": "#8191a5",
+                        "on-surface-variant": "#44474c",
+                        "surface-dim": "#dbd9db",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#50d9fe",
+                        "surface-tint": "#506072",
+                        "surface-variant": "#e4e2e3",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#ffddb9",
+                        "inverse-on-surface": "#f2f0f1",
+                        "on-secondary-fixed-variant": "#004e5f",
+                        "tertiary": "#211100",
+                        "on-primary-fixed-variant": "#384859",
+                        "on-background": "#1b1c1d",
+                        "primary-container": "#1a2a3a",
+                        "surface-container-high": "#eae7e9",
+                        "tertiary-container": "#38250d",
+                        "primary-fixed-dim": "#b7c8dd",
+                        "background": "#fbf9fa",
+                        "on-error": "#ffffff",
+                        "primary": "#041525",
+                        "surface-bright": "#fbf9fa",
+                        "on-primary-fixed": "#0c1d2c",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#fbf9fa",
+                        "outline-variant": "#c4c6cc",
+                        "on-secondary-container": "#005c70",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#e2c19e",
+                        "outline": "#74777d",
+                        "surface-container-low": "#f5f3f4",
+                        "secondary-fixed-dim": "#4cd6fb",
+                        "inverse-surface": "#303032",
+                        "on-tertiary-fixed": "#291803"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "xl": "32px",
+                        "margin": "24px",
+                        "md": "16px",
+                        "base": "8px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-xl-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-xl": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "fontWeight": "500" }],
+                        "headline-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-lg": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-xl-mobile": ["28px", { "lineHeight": "1.2", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-lg antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="sticky top-0 w-full z-50 flex justify-between items-center px-lg h-16 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline">
+<div class="flex items-center gap-lg">
+<div class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed">B-Roll Studio</div>
+<div class="hidden md:flex gap-md">
+<a class="font-body-lg text-body-lg text-secondary dark:text-secondary-fixed-dim border-b-2 border-secondary dark:border-secondary-fixed-dim pb-1" href="#">Dashboard</a>
+<a class="font-body-lg text-body-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-surface-container-highest transition-colors px-2 py-1 rounded" href="#">Gallery</a>
+<a class="font-body-lg text-body-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-surface-container-highest transition-colors px-2 py-1 rounded" href="#">Editor</a>
+<a class="font-body-lg text-body-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-surface-container-highest transition-colors px-2 py-1 rounded" href="#">Assets</a>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="hidden md:flex items-center gap-sm bg-primary text-on-primary px-4 py-2 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-colors">
+                New Project
+            </button>
+<div class="flex gap-sm">
+<button class="p-2 text-on-surface-variant hover:text-primary hover:bg-surface-container rounded-full transition-colors" data-icon="notifications">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary hover:bg-surface-container rounded-full transition-colors" data-icon="settings">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<img alt="User profile" class="w-8 h-8 rounded-full border border-outline-variant" data-alt="A small circular profile picture of a professional user in a light-mode corporate setting. The background is subtle and bright, aligning with a clean modern UI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBhSs2Ua3QnSabCpJ15BO0vMgWFtOsWWYTlWcfiKvuT9lvn97vvziW60HbMhEatWzxiEvnjCDn86mz-OveG8qixBJ_Uis7ks8w8vK0_ZW9T_ND6h2IwamAyv68HIGOXbvDk6OnLIy4lh2Re-SYXlaIkMCqx2kVx_KEkuLmQf3x8HNBPtifs_U1fE_C6eSSgTTHNrrdNJhJnskROhsQFbxUjGMPX39h_EOIpiL4-f-PZRGG6ywTBgyFYVZ1jsqwEiK1kXqSnjQtqUg">
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="w-full py-24 px-lg flex flex-col items-center justify-center text-center bg-gradient-to-b from-surface to-surface-container-low">
+<h1 class="font-headline-xl text-headline-xl md:text-5xl lg:text-6xl max-w-4xl mb-6 text-primary">Turn Your Script into a Video in Minutes</h1>
+<p class="font-body-lg text-body-lg md:text-xl text-on-surface-variant max-w-2xl mb-10">B-Roll Studio leverages advanced AI to analyze your text, intelligently source high-quality clips, and assemble a professional timeline—leaving you to focus on the final creative polish.</p>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="bg-[#00B4D8] text-white px-8 py-4 rounded-lg font-label-md text-label-md font-bold shadow-lg shadow-[#00B4D8]/20 hover:bg-[#0096B4] transition-all hover:scale-105">Start Creating</button>
+<button class="bg-surface-container-lowest text-primary border border-outline-variant px-8 py-4 rounded-lg font-label-md text-label-md font-bold hover:bg-surface-container transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">play_circle</span>
+                    Watch Demo
+                </button>
+</div>
+</section>
+<!-- Features Bento Grid -->
+<section class="py-xl px-lg max-w-7xl mx-auto">
+<div class="text-center mb-16">
+<h2 class="font-headline-xl text-headline-xl text-primary mb-4">Intelligent Editing Suite</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Everything you need to transform text into compelling visual stories.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
+<!-- Feature 1: AI Script Analysis (Large Span) -->
+<div class="md:col-span-2 bg-surface-container-lowest rounded-xl border border-outline-variant p-8 flex flex-col md:flex-row items-center gap-8 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary-fixed/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex-1 z-10">
+<div class="w-12 h-12 bg-primary text-on-primary rounded-lg flex items-center justify-center mb-6">
+<span class="material-symbols-outlined">document_scanner</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-3">AI Script Analysis</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Simply paste your script. Our AI comprehends tone, pacing, and core subjects to automatically suggest the most impactful visual sequences and scene breaks.</p>
+</div>
+<div class="flex-1 w-full h-full min-h-[150px] bg-surface-container rounded-lg border border-outline-variant overflow-hidden relative">
+<div class="bg-cover bg-center w-full h-full" data-alt="A sleek, modern UI mock-up showing a text editor analyzing a script. Words are highlighted in subtle teal and coral hues. The interface is clean, light-mode, and professional, reflecting a high-end corporate editing tool." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBFiDe-TL_mHw5HU5jPdys2YRyoMUHqRRrLqvwcO2j524M_6j45lie79eID7NKAFKLfPwKxok-mhxph7QCKIOkGLsPnvajPD-KYXbYC-wSDBX-6AFlr2ts5lJJ71lpFWq-uYW6vsQOw0-2asbhB65b5aoLc1wgwiWyEOWjq1MOpu_DR3-moE_ZPJHTOYMh8DFuH4jpO7KFD6f60k_Syw3Z97v9bJ_CXTC7qoGCy8vgFWT7gDs3d7bPnv5yL72n9SC3crMs1hwqoXFQ')"></div>
+</div>
+</div>
+<!-- Feature 2: Smart Clip Suggestions -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-8 flex flex-col shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="w-12 h-12 bg-[#00B4D8] text-white rounded-lg flex items-center justify-center mb-6 z-10">
+<span class="material-symbols-outlined">movie_filter</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-3 z-10">Smart Clip Suggestions</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant flex-grow z-10">Instantly access a curated library of high-quality B-roll matched perfectly to your narrative context.</p>
+<div class="absolute -bottom-10 -right-10 w-32 h-32 bg-secondary-container rounded-full opacity-20 group-hover:scale-150 transition-transform duration-500"></div>
+</div>
+<!-- Feature 3: Drag & Drop Timeline -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-8 flex flex-col shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="w-12 h-12 bg-surface-tint text-on-primary rounded-lg flex items-center justify-center mb-6 z-10">
+<span class="material-symbols-outlined">linear_scale</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-3 z-10">Drag &amp; Drop Timeline</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant z-10">Refine the AI's assembly with a fluid, intuitive timeline interface designed for precise adjustments.</p>
+</div>
+<!-- Feature 4: Export & Share (Large Span) -->
+<div class="md:col-span-2 bg-surface-container-lowest rounded-xl border border-outline-variant p-8 flex flex-col md:flex-row-reverse items-center gap-8 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="flex-1 z-10">
+<div class="w-12 h-12 bg-primary text-on-primary rounded-lg flex items-center justify-center mb-6">
+<span class="material-symbols-outlined">ios_share</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-3">Export &amp; Share</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Render your project in stunning 4K. Seamlessly export in formats optimized for YouTube, social media, or professional delivery.</p>
+</div>
+<div class="flex-1 w-full h-full min-h-[150px] bg-surface-container rounded-lg border border-outline-variant overflow-hidden relative">
+<div class="bg-cover bg-center w-full h-full" data-alt="A clean, light-mode interface element showing export progress and format selection options. Subtle blue and white tones dominate, suggesting a fast, reliable, and professional software experience." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAfARsuZ051muDASwQW6CtyWGre1U_eyrMiLPMzRguahk4ZWZBkMgYzMKYiZ7TkyuLBcbggkC6tpJfmQwOjzEAA5-RkHwZnX8lWq1dRcQTFI88wIoYYJUsmbFcYfGF9XT4jXSiZVkHJ8DwFMJ6XJRWFLAturtxNa13OFvjIYRpkApoH--7W56n1VoFT3JvS7WnL2NF4mXXM9gWw9tpOUhzfMgn8oBacnJPX6s45pzRvkVwhmjSu1UjKL24wcNpVJ7sdGdg3xoud3tA')"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- How It Works (3 Steps) -->
+<section class="py-24 px-lg bg-surface-container-low border-t border-outline-variant">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-16">
+<h2 class="font-headline-xl text-headline-xl text-primary mb-4">How It Works</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">From raw text to polished video in three simple steps.</p>
+</div>
+<div class="flex flex-col md:flex-row gap-8 relative">
+<!-- Connecting Line (Desktop only) -->
+<div class="hidden md:block absolute top-12 left-[10%] right-[10%] h-0.5 bg-outline-variant z-0"></div>
+<!-- Step 1 -->
+<div class="flex-1 flex flex-col items-center text-center relative z-10">
+<div class="w-24 h-24 bg-surface-container-lowest rounded-full border-4 border-surface-container-low shadow-sm flex items-center justify-center text-primary font-headline-xl text-headline-xl mb-6">1</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-3">Import Script</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Write or paste your narration. B-Roll Studio instantly parses the content.</p>
+</div>
+<!-- Step 2 -->
+<div class="flex-1 flex flex-col items-center text-center relative z-10">
+<div class="w-24 h-24 bg-surface-container-lowest rounded-full border-4 border-surface-container-low shadow-sm flex items-center justify-center text-[#00B4D8] font-headline-xl text-headline-xl mb-6">2</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-3">AI Assembly</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Our engine curates matching clips and generates a rough cut timeline automatically.</p>
+</div>
+<!-- Step 3 -->
+<div class="flex-1 flex flex-col items-center text-center relative z-10">
+<div class="w-24 h-24 bg-surface-container-lowest rounded-full border-4 border-surface-container-low shadow-sm flex items-center justify-center text-primary font-headline-xl text-headline-xl mb-6">3</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-3">Refine &amp; Export</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Tweak the edits, adjust pacing, and export your final masterpiece.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-xl px-lg flex flex-col md:flex-row justify-between items-center gap-md bg-primary dark:bg-surface-container-lowest">
+<div class="font-headline-md text-headline-md font-black text-on-primary dark:text-primary">B-Roll Studio</div>
+<div class="flex flex-wrap justify-center gap-md">
+<a class="font-body-sm text-body-sm text-on-primary-fixed-variant dark:text-on-surface-variant hover:text-secondary-container dark:hover:text-secondary transition-colors" href="#">Privacy Policy</a>
+<a class="font-body-sm text-body-sm text-on-primary-fixed-variant dark:text-on-surface-variant hover:text-secondary-container dark:hover:text-secondary transition-colors" href="#">Terms of Service</a>
+<a class="font-body-sm text-body-sm text-on-primary-fixed-variant dark:text-on-surface-variant hover:text-secondary-container dark:hover:text-secondary transition-colors" href="#">API Docs</a>
+<a class="font-body-sm text-body-sm text-on-primary-fixed-variant dark:text-on-surface-variant hover:text-secondary-container dark:hover:text-secondary transition-colors" href="#">Support</a>
+</div>
+<div class="font-body-sm text-body-sm text-on-primary-fixed-variant dark:text-on-surface-variant">© 2024 B-Roll Studio AI. All rights reserved.</div>
+</footer>
+
+<div id="proto-nav" style="position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;background:#041525;color:#fff;padding:8px 14px;border-radius:9999px;font-family:Inter,sans-serif;font-size:12px;display:flex;gap:10px;flex-wrap:wrap;max-width:92vw;box-shadow:0 4px 16px rgba(0,0,0,0.25);">
+  <a href="index.html" style="color:#b7c8dd;text-decoration:none;">Landing</a>
+  <a href="sign-up.html" style="color:#b7c8dd;text-decoration:none;">Sign Up</a>
+  <a href="log-in.html" style="color:#b7c8dd;text-decoration:none;">Log In</a>
+  <a href="dashboard.html" style="color:#b7c8dd;text-decoration:none;">Dashboard</a>
+  <a href="script-input.html" style="color:#b7c8dd;text-decoration:none;">Script</a>
+  <a href="clip-gallery.html" style="color:#b7c8dd;text-decoration:none;">Clips</a>
+  <a href="timeline-assembly.html" style="color:#b7c8dd;text-decoration:none;">Timeline</a>
+  <a href="audio-upload.html" style="color:#b7c8dd;text-decoration:none;">Audio</a>
+  <a href="export-modal.html" style="color:#b7c8dd;text-decoration:none;">Export</a>
+  <a href="video-preview-modal.html" style="color:#b7c8dd;text-decoration:none;">Preview</a>
+</div>
+</body></html>

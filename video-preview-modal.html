@@ -1,0 +1,260 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>B-Roll Studio - Video Preview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed": "#001f27",
+                      "primary-container": "#1a2a3a",
+                      "surface-variant": "#e4e2e3",
+                      "on-secondary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "primary": "#041525",
+                      "on-primary-fixed": "#0c1d2c",
+                      "surface-tint": "#506072",
+                      "error-container": "#ffdad6",
+                      "on-primary": "#ffffff",
+                      "tertiary-container": "#38250d",
+                      "outline": "#74777d",
+                      "on-primary-fixed-variant": "#384859",
+                      "inverse-surface": "#303032",
+                      "on-tertiary-container": "#a88b6b",
+                      "on-error": "#ffffff",
+                      "primary-fixed-dim": "#b7c8dd",
+                      "outline-variant": "#c4c6cc",
+                      "on-background": "#1b1c1d",
+                      "on-primary-container": "#8191a5",
+                      "secondary-fixed-dim": "#4cd6fb",
+                      "on-tertiary-fixed": "#291803",
+                      "inverse-on-surface": "#f2f0f1",
+                      "secondary": "#00677d",
+                      "surface-container-low": "#f5f3f4",
+                      "on-tertiary-fixed-variant": "#594328",
+                      "inverse-primary": "#b7c8dd",
+                      "on-tertiary": "#ffffff",
+                      "background": "#fbf9fa",
+                      "surface-dim": "#dbd9db",
+                      "on-surface-variant": "#44474c",
+                      "on-secondary-container": "#005c70",
+                      "surface-container-high": "#eae7e9",
+                      "surface": "#fbf9fa",
+                      "secondary-fixed": "#b3ebff",
+                      "surface-bright": "#fbf9fa",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-fixed": "#d3e4fa",
+                      "error": "#ba1a1a",
+                      "on-surface": "#1b1c1d",
+                      "tertiary-fixed-dim": "#e2c19e",
+                      "tertiary": "#211100",
+                      "on-secondary-fixed-variant": "#004e5f",
+                      "tertiary-fixed": "#ffddb9",
+                      "surface-container-highest": "#e4e2e3",
+                      "surface-container": "#efedef",
+                      "secondary-container": "#50d9fe"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "sm": "8px",
+                      "lg": "24px",
+                      "base": "8px",
+                      "md": "16px",
+                      "xl": "32px",
+                      "margin": "24px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-xl-mobile": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "headline-xl": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-xl-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "1",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-xl": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .backdrop-blur-sm {
+            backdrop-filter: blur(4px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface h-screen w-screen overflow-hidden font-body-lg">
+<!-- Background Layer: Timeline Assembly Page -->
+<div class="absolute inset-0 z-0">
+<img alt="Timeline Assembly Page" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1wuD6LOmxGBw3urwj4s7vUL-dKY3p-I7CUQbgAvtyViG7DbHdgqDx-jq88ilefERuIg1m5Ahk7meWUxSUq8Ca6pfndfau3MPPo0flTX4_5FPzre5wV8imCB0cKiRPiKzUugjSXHHp3agqyKYt2FRL1UOdcTbXeUnQmxhWatjA_cJGMaA8efZ0bTKc8X91FGkLRz19SU2OGY5RxDuwEefQY_fGhn1sEV1ya_RzNE8szc34VAFGTAFTKlfdSINmUiL0utWwHNxtHkw">
+</div>
+<!-- Modal Overlay -->
+<div class="absolute inset-0 bg-primary/40 backdrop-blur-sm z-40 flex items-center justify-center p-md md:p-xl">
+<!-- Modal Container -->
+<div class="bg-surface-container-lowest w-full max-w-5xl rounded-[16px] shadow-[0_2px_12px_rgba(26,42,58,0.08)] border border-outline-variant/30 flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+<!-- Header -->
+<div class="flex items-center justify-between px-lg py-md border-b border-outline-variant/30">
+<h2 class="font-headline-md text-headline-md text-primary">Video Preview</h2>
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center rounded-full p-xs hover:bg-surface-container">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Video Player Area -->
+<div class="relative w-full aspect-video bg-black group">
+<!-- Video Content -->
+<div class="absolute inset-0 w-full h-full">
+<div class="w-full h-full bg-cover bg-center" data-alt="A cinematic, high-resolution shot of vibrant macaws flying through a lush, sun-dappled tropical rainforest. The lighting is bright and natural, highlighting the vivid reds, blues, and yellows of the birds against the deep greens of the foliage. The scene evokes a sense of wild nature and high-end documentary production quality, fitting for a professional video editing studio preview. The image is crisp, detailed, and visually stunning." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDiGSiJ30S3pe28dgP4wV_FcPWMOLZv8aLIhRr2ptXYsQdAD1b_EmAt-jhlqshL5paovx47xlaKeuU-FgbxvwJRT7S2oMviVHyMVmmKWLpcWl29tgpzj2Os3-7_yq_UhQ4tjP2HEQvUKf8Vhm2B-vR42zez6OfSLnWjboHZrps2gdWdGNuaVYR39xGgFnumZA2mDRdGFDBT4fnH4fL2CVDw6Gv4f2rRK2MQ_qfSKpumOOIU6rDAS507iQST9cvbFDuDqtdT3_BtYFw')"></div>
+</div>
+<!-- Custom Controls Overlay -->
+<div class="absolute bottom-0 left-0 right-0 p-md bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<!-- Progress Bar -->
+<div class="w-full h-1 bg-surface-variant/30 rounded-full mb-md cursor-pointer relative">
+<div class="absolute top-0 left-0 h-full bg-secondary rounded-full" style="width: 15%;"></div>
+<div class="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-secondary rounded-full shadow-md cursor-grab" style="left: 15%;"></div>
+</div>
+<!-- Controls Row -->
+<div class="flex items-center justify-between text-on-primary">
+<div class="flex items-center gap-md">
+<button class="hover:text-secondary-fixed transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<div class="flex items-center gap-sm">
+<button class="hover:text-secondary-fixed transition-colors">
+<span class="material-symbols-outlined">volume_up</span>
+</button>
+<div class="w-24 h-1 bg-surface-variant/30 rounded-full hidden sm:block">
+<div class="w-2/3 h-full bg-on-primary rounded-full"></div>
+</div>
+</div>
+<span class="font-label-sm text-label-sm opacity-90 ml-sm">00:42 / 04:42</span>
+</div>
+<div class="flex items-center gap-md">
+<button class="hover:text-secondary-fixed transition-colors">
+<span class="material-symbols-outlined">closed_caption</span>
+</button>
+<button class="hover:text-secondary-fixed transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="hover:text-secondary-fixed transition-colors">
+<span class="material-symbols-outlined">fullscreen</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="flex items-center justify-between px-lg py-md border-t border-outline-variant/30 bg-surface-container-low">
+<button class="px-md py-sm rounded-lg border border-primary text-primary font-label-md text-label-md hover:bg-surface-container transition-colors">
+                    Back to Editing
+                </button>
+<button class="px-md py-sm rounded-lg bg-secondary text-on-secondary font-label-md text-label-md hover:bg-on-secondary-container transition-colors flex items-center gap-xs shadow-sm">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                    Export Video
+                </button>
+</div>
+</div>
+</div>
+
+<div id="proto-nav" style="position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;background:#041525;color:#fff;padding:8px 14px;border-radius:9999px;font-family:Inter,sans-serif;font-size:12px;display:flex;gap:10px;flex-wrap:wrap;max-width:92vw;box-shadow:0 4px 16px rgba(0,0,0,0.25);">
+  <a href="index.html" style="color:#b7c8dd;text-decoration:none;">Landing</a>
+  <a href="sign-up.html" style="color:#b7c8dd;text-decoration:none;">Sign Up</a>
+  <a href="log-in.html" style="color:#b7c8dd;text-decoration:none;">Log In</a>
+  <a href="dashboard.html" style="color:#b7c8dd;text-decoration:none;">Dashboard</a>
+  <a href="script-input.html" style="color:#b7c8dd;text-decoration:none;">Script</a>
+  <a href="clip-gallery.html" style="color:#b7c8dd;text-decoration:none;">Clips</a>
+  <a href="timeline-assembly.html" style="color:#b7c8dd;text-decoration:none;">Timeline</a>
+  <a href="audio-upload.html" style="color:#b7c8dd;text-decoration:none;">Audio</a>
+  <a href="export-modal.html" style="color:#b7c8dd;text-decoration:none;">Export</a>
+  <a href="video-preview-modal.html" style="color:#b7c8dd;text-decoration:none;">Preview</a>
+</div>
+</body></html>

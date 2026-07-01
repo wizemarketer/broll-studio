@@ -1,0 +1,239 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>B-Roll Studio - Export Project</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+        
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f5f3f4",
+                        "on-primary-fixed-variant": "#384859",
+                        "on-background": "#1b1c1d",
+                        "on-primary-container": "#8191a5",
+                        "tertiary": "#211100",
+                        "tertiary-fixed-dim": "#e2c19e",
+                        "secondary": "#00677d",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#44474c",
+                        "inverse-on-surface": "#f2f0f1",
+                        "tertiary-container": "#38250d",
+                        "surface-container-highest": "#e4e2e3",
+                        "outline-variant": "#c4c6cc",
+                        "inverse-primary": "#b7c8dd",
+                        "primary-fixed-dim": "#b7c8dd",
+                        "on-secondary-fixed": "#001f27",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#dbd9db",
+                        "on-surface": "#1b1c1d",
+                        "secondary-fixed-dim": "#4cd6fb",
+                        "surface": "#fbf9fa",
+                        "outline": "#74777d",
+                        "on-primary-fixed": "#0c1d2c",
+                        "error": "#ba1a1a",
+                        "primary-container": "#1a2a3a",
+                        "surface-tint": "#506072",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e4e2e3",
+                        "secondary-fixed": "#b3ebff",
+                        "on-secondary-fixed-variant": "#004e5f",
+                        "surface-bright": "#fbf9fa",
+                        "on-tertiary-fixed": "#291803",
+                        "on-tertiary": "#ffffff",
+                        "background": "#fbf9fa",
+                        "on-tertiary-container": "#a88b6b",
+                        "secondary-container": "#50d9fe",
+                        "on-primary": "#ffffff",
+                        "primary": "#041525",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#005c70",
+                        "primary-fixed": "#d3e4fa",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#ffddb9",
+                        "inverse-surface": "#303032",
+                        "on-tertiary-fixed-variant": "#594328",
+                        "surface-container-high": "#eae7e9",
+                        "surface-container": "#efedef"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "margin": "24px",
+                        "gutter": "16px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "base": "8px",
+                        "xl": "32px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-xl-mobile": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "1", "fontWeight": "500" }],
+                        "headline-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "headline-lg": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-xl-mobile": ["28px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-xl": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-lg h-screen w-full flex relative overflow-hidden">
+<!-- Background Content (Timeline Screen) -->
+<div class="absolute inset-0 z-0 opacity-50 blur-sm pointer-events-none">
+<img alt="Background screen placeholder" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkuqLsranWhCk35jq1qpbibSQo-ldx1p_Pq0hhhjgoy5ABo8SdIJnNrUdbf9kXpYTfJMca6j07qCXSKT84i_1yLSphEFuAbcEmIoFRVjg5fWBqZRLRuybFVGMd6sLlRz8SZPjShQHKybAhXDO1VoAtjtobjQDrSsocOfryUwAzPrybXnx6gGqvJhVBhiaLzIeiH-Zf8uk8169pg_OA8ZSYx9R32a6IF6uKCgfMImMIv3pHGSo8W1wuM2kCEShKTjyUa4F0pRS-_Mo">
+</div>
+<!-- Modal Overlay -->
+<div class="absolute inset-0 z-50 flex items-center justify-center bg-on-background/40 backdrop-blur-sm p-4">
+<!-- Export Modal -->
+<div class="bg-surface-container-lowest rounded-[12px] border border-outline-variant w-full max-w-lg shadow-[0_2px_12px_rgba(26,42,58,0.08)] flex flex-col overflow-hidden">
+<!-- Modal Header -->
+<div class="flex items-center justify-between p-lg border-b border-outline-variant bg-surface">
+<h2 class="font-headline-md text-headline-md text-on-surface">Export Project</h2>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors p-xs rounded-lg hover:bg-surface-container-highest">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<!-- Modal Body -->
+<div class="p-lg flex flex-col gap-lg overflow-y-auto max-h-[716px]">
+<!-- File Name -->
+<div class="flex flex-col gap-sm">
+<label class="font-label-md text-label-md text-on-surface-variant">File Name</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-md py-sm font-body-lg text-on-surface focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-all" type="text" value="Nature_Vlog_Final">
+</div>
+<!-- Format Selection -->
+<div class="flex flex-col gap-sm">
+<label class="font-label-md text-label-md text-on-surface-variant">Format</label>
+<div class="flex rounded-lg overflow-hidden border border-outline-variant">
+<button class="flex-1 bg-secondary text-on-secondary font-label-md text-label-md py-sm px-md transition-colors">MP4</button>
+<button class="flex-1 bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container font-label-md text-label-md py-sm px-md border-l border-outline-variant transition-colors">MOV</button>
+<button class="flex-1 bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container font-label-md text-label-md py-sm px-md border-l border-outline-variant transition-colors">AVI</button>
+</div>
+</div>
+<!-- Resolution Selection -->
+<div class="flex flex-col gap-sm">
+<label class="font-label-md text-label-md text-on-surface-variant">Resolution</label>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-sm">
+<!-- Option 1 -->
+<div class="border border-outline-variant rounded-lg p-md cursor-pointer hover:border-secondary hover:bg-surface-container transition-all flex flex-col items-center text-center">
+<span class="font-headline-md text-headline-md text-on-surface">720p</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">HD</span>
+</div>
+<!-- Option 2 (Selected) -->
+<div class="border-2 border-secondary bg-surface-container rounded-lg p-md cursor-pointer relative flex flex-col items-center text-center">
+<div class="absolute top-sm right-sm text-secondary">
+<span class="material-symbols-outlined text-[16px]" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface">1080p</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Full HD</span>
+</div>
+<!-- Option 3 -->
+<div class="border border-outline-variant rounded-lg p-md cursor-pointer hover:border-secondary hover:bg-surface-container transition-all flex flex-col items-center text-center">
+<span class="font-headline-md text-headline-md text-on-surface">4K</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Ultra HD</span>
+</div>
+</div>
+</div>
+<!-- Advanced Settings -->
+<div class="flex flex-col gap-md pt-sm border-t border-outline-variant">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface">Include Captions</span>
+<div class="w-10 h-6 bg-secondary rounded-full relative cursor-pointer">
+<div class="w-4 h-4 bg-on-secondary rounded-full absolute top-1 right-1"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface">Optimize for Web</span>
+<div class="w-10 h-6 bg-surface-variant rounded-full relative cursor-pointer">
+<div class="w-4 h-4 bg-outline rounded-full absolute top-1 left-1"></div>
+</div>
+</div>
+</div>
+<!-- Progress Section (Simulated Active State) -->
+<div class="flex flex-col gap-sm pt-sm border-t border-outline-variant">
+<div class="flex justify-between items-end">
+<span class="font-label-sm text-label-sm text-secondary">Preparing your video...</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">65%</span>
+</div>
+<div class="w-full h-2 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[65%] rounded-full relative overflow-hidden">
+<!-- Shimmer effect -->
+<div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-[shimmer_2s_infinite]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="p-lg border-t border-outline-variant bg-surface flex justify-end gap-sm">
+<button class="px-lg py-sm rounded-lg font-label-md text-label-md text-on-surface border border-outline-variant hover:bg-surface-container-highest transition-colors">
+                    Cancel
+                </button>
+<button class="px-lg py-sm rounded-lg font-label-md text-label-md bg-primary text-on-primary hover:bg-primary/90 transition-colors flex items-center gap-xs shadow-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
+                    Export &amp; Download
+                </button>
+</div>
+</div>
+</div>
+<style>
+        @keyframes shimmer {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+    </style>
+
+<div id="proto-nav" style="position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;background:#041525;color:#fff;padding:8px 14px;border-radius:9999px;font-family:Inter,sans-serif;font-size:12px;display:flex;gap:10px;flex-wrap:wrap;max-width:92vw;box-shadow:0 4px 16px rgba(0,0,0,0.25);">
+  <a href="index.html" style="color:#b7c8dd;text-decoration:none;">Landing</a>
+  <a href="sign-up.html" style="color:#b7c8dd;text-decoration:none;">Sign Up</a>
+  <a href="log-in.html" style="color:#b7c8dd;text-decoration:none;">Log In</a>
+  <a href="dashboard.html" style="color:#b7c8dd;text-decoration:none;">Dashboard</a>
+  <a href="script-input.html" style="color:#b7c8dd;text-decoration:none;">Script</a>
+  <a href="clip-gallery.html" style="color:#b7c8dd;text-decoration:none;">Clips</a>
+  <a href="timeline-assembly.html" style="color:#b7c8dd;text-decoration:none;">Timeline</a>
+  <a href="audio-upload.html" style="color:#b7c8dd;text-decoration:none;">Audio</a>
+  <a href="export-modal.html" style="color:#b7c8dd;text-decoration:none;">Export</a>
+  <a href="video-preview-modal.html" style="color:#b7c8dd;text-decoration:none;">Preview</a>
+</div>
+</body></html>
