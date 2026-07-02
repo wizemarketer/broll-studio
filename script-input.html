@@ -182,6 +182,10 @@
 <!-- Desktop Top Actions (Mirrors Mobile TopNav trailing actions) -->
 <div class="hidden md:flex items-center gap-md">
 <span id="saveStatus" class="font-label-sm text-label-sm text-on-surface-variant"></span>
+<button id="analyzeScriptBtn" class="bg-secondary-container text-on-secondary-container font-label-md text-label-md font-semibold py-2 px-4 rounded-lg hover:opacity-90 transition-colors shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+                    Analyze with AI
+                </button>
 <button id="saveScriptBtn" class="bg-primary text-on-primary font-label-md text-label-md font-semibold py-2 px-4 rounded-lg hover:bg-primary-container transition-colors shadow-sm flex items-center gap-2">
 <span class="material-symbols-outlined text-[18px]" data-icon="save">save</span>
                     Save Script
@@ -232,6 +236,13 @@
 </div>
 <!-- Settings Panel (Right - 4 cols) -->
 <div class="lg:col-span-4 flex flex-col gap-lg">
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg shadow-sm" id="aiSegmentsPanel" style="display:none;">
+<h3 class="font-headline-md text-headline-md font-semibold text-on-surface mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary">auto_awesome</span>
+                            Script Segments
+                        </h3>
+<div id="aiSegmentsList" class="flex flex-col gap-md"></div>
+</div>
 <div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg shadow-sm">
 <h3 class="font-headline-md text-headline-md font-semibold text-on-surface mb-lg flex items-center gap-sm">
 <span class="material-symbols-outlined text-secondary" data-icon="tune">tune</span>
@@ -362,6 +373,61 @@
     window.history.replaceState({}, "", "script-input.html?script=" + scriptId);
     statusEl.style.color = "#00677d";
     statusEl.textContent = "Saved just now";
+  });
+
+  const analyzeBtn = document.getElementById("analyzeScriptBtn");
+  const segmentsPanel = document.getElementById("aiSegmentsPanel");
+  const segmentsList = document.getElementById("aiSegmentsList");
+
+  analyzeBtn.addEventListener("click", async () => {
+    const text = contentEl.value.trim();
+    if (!text) {
+      statusEl.textContent = "Write or paste a script first.";
+      return;
+    }
+
+    analyzeBtn.disabled = true;
+    analyzeBtn.textContent = "Analyzing...";
+    segmentsPanel.style.display = "block";
+    segmentsList.innerHTML = '<p class="font-body-sm text-body-sm text-on-surface-variant">Asking AI to break down your script...</p>';
+
+    const { data: { session: currentSession } } = await supabase.auth.getSession();
+
+    const res = await fetch("https://jctjfwoihtygvlhqmifs.supabase.co/functions/v1/analyze-script", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + currentSession.access_token
+      },
+      body: JSON.stringify({ script: text })
+    });
+
+    analyzeBtn.disabled = false;
+    analyzeBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">auto_awesome</span> Analyze with AI';
+
+    const data = await res.json();
+    if (!res.ok || data.error) {
+      segmentsList.innerHTML = '<p class="font-body-sm text-body-sm" style="color:#ba1a1a;">' + (data.error || "Analysis failed") + '</p>';
+      return;
+    }
+
+    const segments = data.segments || [];
+    if (segments.length === 0) {
+      segmentsList.innerHTML = '<p class="font-body-sm text-body-sm text-on-surface-variant">No segments returned.</p>';
+      return;
+    }
+
+    segmentsList.innerHTML = segments.map((seg, i) => `
+      <div class="border border-outline-variant rounded-lg p-md">
+        <p class="font-body-sm text-body-sm text-on-surface mb-sm">"${seg.text.length > 120 ? seg.text.slice(0, 120) + "..." : seg.text}"</p>
+        <div class="flex flex-wrap gap-xs mb-sm">
+          ${(seg.keywords || []).map(k => `<span class="bg-surface-container px-2 py-1 rounded-full font-label-sm text-label-sm text-primary">${k}</span>`).join("")}
+        </div>
+        <button class="text-secondary font-label-sm text-label-sm hover:underline" onclick="window.location.href='clip-gallery.html?stock_query=${encodeURIComponent((seg.keywords || [])[0] || '')}${scriptId ? '&script=' + scriptId : ''}'">
+          Find B-roll for this segment →
+        </button>
+      </div>
+    `).join("");
   });
 })();
 </script>
