@@ -146,7 +146,7 @@
 <div>
 <div class="flex justify-between items-center mb-xs">
 <label class="block font-label-md text-label-md text-on-surface" for="password">Password</label>
-<a class="font-label-sm text-label-sm text-secondary hover:text-secondary-container transition-colors" href="#">Forgot password?</a>
+<a class="font-label-sm text-label-sm text-secondary hover:text-secondary-container transition-colors" href="#" id="forgotPasswordLink">Forgot password?</a>
 </div>
 <input class="w-full rounded-lg border-outline-variant bg-surface-bright text-on-surface font-body-sm text-body-sm focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors py-sm px-md" id="password" name="password" placeholder="••••••••" required="" type="password"/>
 </div>
@@ -185,6 +185,22 @@
     }
     window.location.href = "dashboard.html";
   });
+
+  document.getElementById("forgotPasswordLink").addEventListener("click", async (e) => {
+    e.preventDefault();
+    const msgEl = document.getElementById("formMessage");
+    const email = document.getElementById("email").value.trim();
+    if (!email) {
+      showFormMessage(msgEl, "Enter your email above first, then click Forgot password?.");
+      return;
+    }
+    const { error } = await supabase.auth.resetPasswordForEmail(email);
+    if (error) {
+      showFormMessage(msgEl, error.message);
+    } else {
+      showFormMessage(msgEl, "Password reset email sent to " + email + ".", false);
+    }
+  });
 </script>
 <!-- Divider -->
 <div class="mt-lg mb-lg flex items-center">
@@ -207,7 +223,7 @@
 <div class="text-center mt-xl">
 <p class="font-body-sm text-body-sm text-on-surface-variant">
                         Don't have an account? 
-                        <a class="font-label-md text-label-md text-secondary hover:underline transition-all" href="#">Sign Up</a>
+                        <a class="font-label-md text-label-md text-secondary hover:underline transition-all" href="sign-up.html">Sign Up</a>
 </p>
 </div>
 </div>
@@ -223,24 +239,12 @@
 </div>
 <nav>
 <ul class="flex flex-wrap justify-center gap-md">
-<li><a class="text-on-surface-variant dark:text-on-primary-container hover:underline hover:text-secondary transition-all" href="#">Privacy Policy</a></li>
-<li><a class="text-on-surface-variant dark:text-on-primary-container hover:underline hover:text-secondary transition-all" href="#">Terms of Service</a></li>
-<li><a class="text-on-surface-variant dark:text-on-primary-container hover:underline hover:text-secondary transition-all" href="#">Security</a></li>
-<li><a class="text-on-surface-variant dark:text-on-primary-container hover:underline hover:text-secondary transition-all" href="#">Help Center</a></li>
+<li><span class="text-on-surface-variant dark:text-on-primary-container hover:underline hover:text-secondary transition-all">Privacy Policy</span></li>
+<li><span class="text-on-surface-variant dark:text-on-primary-container hover:underline hover:text-secondary transition-all">Terms of Service</span></li>
+<li><span class="text-on-surface-variant dark:text-on-primary-container hover:underline hover:text-secondary transition-all">Security</span></li>
+<li><span class="text-on-surface-variant dark:text-on-primary-container hover:underline hover:text-secondary transition-all">Help Center</span></li>
 </ul>
 </nav>
 </footer>
 
-<div id="proto-nav" style="position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;background:#041525;color:#fff;padding:8px 14px;border-radius:9999px;font-family:Inter,sans-serif;font-size:12px;display:flex;gap:10px;flex-wrap:wrap;max-width:92vw;box-shadow:0 4px 16px rgba(0,0,0,0.25);">
-  <a href="index.html" style="color:#b7c8dd;text-decoration:none;">Landing</a>
-  <a href="sign-up.html" style="color:#b7c8dd;text-decoration:none;">Sign Up</a>
-  <a href="log-in.html" style="color:#b7c8dd;text-decoration:none;">Log In</a>
-  <a href="dashboard.html" style="color:#b7c8dd;text-decoration:none;">Dashboard</a>
-  <a href="script-input.html" style="color:#b7c8dd;text-decoration:none;">Script</a>
-  <a href="clip-gallery.html" style="color:#b7c8dd;text-decoration:none;">Clips</a>
-  <a href="timeline-assembly.html" style="color:#b7c8dd;text-decoration:none;">Timeline</a>
-  <a href="audio-upload.html" style="color:#b7c8dd;text-decoration:none;">Audio</a>
-  <a href="export-modal.html" style="color:#b7c8dd;text-decoration:none;">Export</a>
-  <a href="video-preview-modal.html" style="color:#b7c8dd;text-decoration:none;">Preview</a>
-</div>
 </body></html>

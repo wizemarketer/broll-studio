@@ -95,7 +95,7 @@
         }
     }catch(_e){}</script></head><body class="bg-surface text-on-surface min-h-screen flex flex-col font-body-lg">
 <header class="w-full flex items-center h-16 px-lg bg-surface border-b border-outline-variant sticky top-0 z-50">
-<button class="flex items-center gap-sm text-on-surface-variant hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-secondary rounded-DEFAULT px-sm py-xs">
+<button onclick="window.location.href='timeline-assembly.html'" class="flex items-center gap-sm text-on-surface-variant hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-secondary rounded-DEFAULT px-sm py-xs">
 <span class="material-symbols-outlined" data-icon="arrow_back" data-weight="fill" style="font-variation-settings: 'FILL' 1;" data-original-icon="arrow_back">arrow_back</span>
 <span class="font-label-md text-label-md">Back to Timeline</span>
 </button>
@@ -142,18 +142,6 @@
 <div class="relative">
 <input type="checkbox" class="sr-only peer" checked="">
 </div></label></div></section></main>
-<div id="proto-nav" style="position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;background:#041525;color:#fff;padding:8px 14px;border-radius:9999px;font-family:Inter,sans-serif;font-size:12px;display:flex;gap:10px;flex-wrap:wrap;max-width:92vw;box-shadow:0 4px 16px rgba(0,0,0,0.25);">
-  <a href="index.html" style="color:#b7c8dd;text-decoration:none;">Landing</a>
-  <a href="sign-up.html" style="color:#b7c8dd;text-decoration:none;">Sign Up</a>
-  <a href="log-in.html" style="color:#b7c8dd;text-decoration:none;">Log In</a>
-  <a href="dashboard.html" style="color:#b7c8dd;text-decoration:none;">Dashboard</a>
-  <a href="script-input.html" style="color:#b7c8dd;text-decoration:none;">Script</a>
-  <a href="clip-gallery.html" style="color:#b7c8dd;text-decoration:none;">Clips</a>
-  <a href="timeline-assembly.html" style="color:#b7c8dd;text-decoration:none;">Timeline</a>
-  <a href="audio-upload.html" style="color:#b7c8dd;text-decoration:none;">Audio</a>
-  <a href="export-modal.html" style="color:#b7c8dd;text-decoration:none;">Export</a>
-  <a href="video-preview-modal.html" style="color:#b7c8dd;text-decoration:none;">Preview</a>
-</div>
 <script>
 (async () => {
   const session = await requireAuth();

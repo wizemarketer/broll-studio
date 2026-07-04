@@ -121,14 +121,14 @@
 <div class="flex items-center gap-lg">
 <span class="font-headline-lg text-headline-lg font-bold text-primary">B-Roll Studio</span>
 <nav class="hidden md:flex items-center gap-md">
-<a class="text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors px-3 py-2 rounded-md font-label-md text-label-md" href="#">Dashboard</a>
-<a class="text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors px-3 py-2 rounded-md font-label-md text-label-md" href="#">Gallery</a>
-<a class="text-secondary border-b-2 border-secondary pb-1 px-3 py-2 font-label-md text-label-md hover:bg-surface-container transition-colors" href="#">Editor</a>
-<a class="text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors px-3 py-2 rounded-md font-label-md text-label-md" href="#">Assets</a>
+<a class="text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors px-3 py-2 rounded-md font-label-md text-label-md" href="dashboard.html">Dashboard</a>
+<a class="text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors px-3 py-2 rounded-md font-label-md text-label-md" href="clip-gallery.html">Gallery</a>
+<a class="text-secondary border-b-2 border-secondary pb-1 px-3 py-2 font-label-md text-label-md hover:bg-surface-container transition-colors" href="timeline-assembly.html">Editor</a>
+<a class="text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors px-3 py-2 rounded-md font-label-md text-label-md" href="audio-upload.html">Assets</a>
 </nav>
 </div>
 <div class="flex items-center gap-md">
-<button class="bg-primary text-on-primary hover:bg-primary-container transition-colors px-4 py-2 rounded-lg font-label-md text-label-md">New Project</button>
+<button onclick="window.location.href='script-input.html'" class="bg-primary text-on-primary hover:bg-primary-container transition-colors px-4 py-2 rounded-lg font-label-md text-label-md">New Project</button>
 <button class="text-on-surface-variant hover:text-primary p-2 rounded-full hover:bg-surface-container transition-colors">
 <span class="material-symbols-outlined">notifications</span>
 </button>
@@ -208,10 +208,10 @@
 <span class="material-symbols-outlined text-sm">zoom_in</span>
 </div>
 <div class="h-6 w-px bg-outline-variant mx-2"></div>
-<button class="px-4 py-2 bg-secondary text-white rounded-lg font-label-md text-label-md hover:bg-secondary-container hover:text-on-secondary-container transition-colors flex items-center gap-2">
+<button onclick="window.location.href='video-preview-modal.html'" class="px-4 py-2 bg-secondary text-white rounded-lg font-label-md text-label-md hover:bg-secondary-container hover:text-on-secondary-container transition-colors flex items-center gap-2">
 <span class="material-symbols-outlined text-sm">preview</span> Preview
                     </button>
-<button class="px-4 py-2 border border-primary text-primary hover:bg-surface-container rounded-lg font-label-md text-label-md transition-colors flex items-center gap-2">
+<button onclick="window.location.href='export-modal.html'" class="px-4 py-2 border border-primary text-primary hover:bg-surface-container rounded-lg font-label-md text-label-md transition-colors flex items-center gap-2">
 <span class="material-symbols-outlined text-sm">download</span> Export
                     </button>
 </div>
@@ -326,17 +326,5 @@
         </div>
 </footer>
 
-<div id="proto-nav" style="position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;background:#041525;color:#fff;padding:8px 14px;border-radius:9999px;font-family:Inter,sans-serif;font-size:12px;display:flex;gap:10px;flex-wrap:wrap;max-width:92vw;box-shadow:0 4px 16px rgba(0,0,0,0.25);">
-  <a href="index.html" style="color:#b7c8dd;text-decoration:none;">Landing</a>
-  <a href="sign-up.html" style="color:#b7c8dd;text-decoration:none;">Sign Up</a>
-  <a href="log-in.html" style="color:#b7c8dd;text-decoration:none;">Log In</a>
-  <a href="dashboard.html" style="color:#b7c8dd;text-decoration:none;">Dashboard</a>
-  <a href="script-input.html" style="color:#b7c8dd;text-decoration:none;">Script</a>
-  <a href="clip-gallery.html" style="color:#b7c8dd;text-decoration:none;">Clips</a>
-  <a href="timeline-assembly.html" style="color:#b7c8dd;text-decoration:none;">Timeline</a>
-  <a href="audio-upload.html" style="color:#b7c8dd;text-decoration:none;">Audio</a>
-  <a href="export-modal.html" style="color:#b7c8dd;text-decoration:none;">Export</a>
-  <a href="video-preview-modal.html" style="color:#b7c8dd;text-decoration:none;">Preview</a>
-</div>
 <script>requireAuth();</script>
 </body></html>

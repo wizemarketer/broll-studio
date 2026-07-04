@@ -131,39 +131,32 @@
 </div>
 </div>
 <nav class="flex-1 overflow-y-auto pr-sm space-y-xs">
-<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-surface-container transition-all group" href="#">
+<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-surface-container transition-all group" href="dashboard.html">
 <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="folder">folder</span>
 <span class="font-label-md text-label-md font-medium">All Projects</span>
 </a>
-<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-surface-container transition-all group" href="#">
-<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="group">group</span>
-<span class="font-label-md text-label-md font-medium">Shared</span>
+<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-surface-container transition-all group" href="script-input.html">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="description">description</span>
+<span class="font-label-md text-label-md font-medium">New Script</span>
 </a>
-<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-surface-container transition-all group" href="#">
-<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="archive">archive</span>
-<span class="font-label-md text-label-md font-medium">Archived</span>
-</a>
-<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-surface-container transition-all group" href="#">
-<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="dashboard_customize">dashboard_customize</span>
-<span class="font-label-md text-label-md font-medium">Templates</span>
-</a>
-<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-surface-container transition-all group" href="#">
+<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-surface-container transition-all group" href="clip-gallery.html">
 <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="video_library">video_library</span>
-<span class="font-label-md text-label-md font-medium">Library</span>
+<span class="font-label-md text-label-md font-medium">Clip Gallery</span>
+</a>
+<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-surface-container transition-all group" href="timeline-assembly.html">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="movie_edit">movie_edit</span>
+<span class="font-label-md text-label-md font-medium">Timeline Editor</span>
+</a>
+<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-surface-container transition-all group" href="audio-upload.html">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="graphic_eq">graphic_eq</span>
+<span class="font-label-md text-label-md font-medium">Audio</span>
 </a>
 </nav>
 <div class="mt-auto pt-lg border-t border-outline-variant space-y-md">
-<a class="flex items-center gap-md px-md py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
-<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="help">help</span>
-<span class="font-label-md text-label-md font-medium">Help</span>
+<a class="flex items-center gap-md px-md py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#" onclick="signOut(); return false;">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md font-medium">Log Out</span>
 </a>
-<a class="flex items-center gap-md px-md py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
-<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="rate_review">rate_review</span>
-<span class="font-label-md text-label-md font-medium">Feedback</span>
-</a>
-<button class="w-full mt-md bg-secondary-container text-on-secondary-container font-label-md text-label-md font-bold py-3 px-4 rounded-lg hover:bg-secondary-fixed transition-colors shadow-sm flex items-center justify-center gap-sm">
-                Upgrade to Pro
-            </button>
 </div>
 </aside>
 <!-- Main Content Canvas -->
@@ -305,18 +298,6 @@
 <label class="relative inline-flex items-center cursor-pointer">
 <input checked="" class="sr-only peer" type="checkbox" value="">
 </label></div></div></div></div></div></div></main>
-<div id="proto-nav" style="position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;background:#041525;color:#fff;padding:8px 14px;border-radius:9999px;font-family:Inter,sans-serif;font-size:12px;display:flex;gap:10px;flex-wrap:wrap;max-width:92vw;box-shadow:0 4px 16px rgba(0,0,0,0.25);">
-  <a href="index.html" style="color:#b7c8dd;text-decoration:none;">Landing</a>
-  <a href="sign-up.html" style="color:#b7c8dd;text-decoration:none;">Sign Up</a>
-  <a href="log-in.html" style="color:#b7c8dd;text-decoration:none;">Log In</a>
-  <a href="dashboard.html" style="color:#b7c8dd;text-decoration:none;">Dashboard</a>
-  <a href="script-input.html" style="color:#b7c8dd;text-decoration:none;">Script</a>
-  <a href="clip-gallery.html" style="color:#b7c8dd;text-decoration:none;">Clips</a>
-  <a href="timeline-assembly.html" style="color:#b7c8dd;text-decoration:none;">Timeline</a>
-  <a href="audio-upload.html" style="color:#b7c8dd;text-decoration:none;">Audio</a>
-  <a href="export-modal.html" style="color:#b7c8dd;text-decoration:none;">Export</a>
-  <a href="video-preview-modal.html" style="color:#b7c8dd;text-decoration:none;">Preview</a>
-</div>
 <script>
 (async () => {
   const session = await requireAuth();

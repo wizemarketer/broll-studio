@@ -187,7 +187,7 @@
 <!-- Header -->
 <div class="flex items-center justify-between px-lg py-md border-b border-outline-variant/30">
 <h2 class="font-headline-md text-headline-md text-primary">Video Preview</h2>
-<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center rounded-full p-xs hover:bg-surface-container">
+<button onclick="window.location.href='timeline-assembly.html'" class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center rounded-full p-xs hover:bg-surface-container">
 <span class="material-symbols-outlined">close</span>
 </button>
 </div>
@@ -236,10 +236,10 @@
 </div>
 <!-- Footer Actions -->
 <div class="flex items-center justify-between px-lg py-md border-t border-outline-variant/30 bg-surface-container-low">
-<button class="px-md py-sm rounded-lg border border-primary text-primary font-label-md text-label-md hover:bg-surface-container transition-colors">
+<button onclick="window.location.href='timeline-assembly.html'" class="px-md py-sm rounded-lg border border-primary text-primary font-label-md text-label-md hover:bg-surface-container transition-colors">
                     Back to Editing
                 </button>
-<button class="px-md py-sm rounded-lg bg-secondary text-on-secondary font-label-md text-label-md hover:bg-on-secondary-container transition-colors flex items-center gap-xs shadow-sm">
+<button onclick="window.location.href='export-modal.html'" class="px-md py-sm rounded-lg bg-secondary text-on-secondary font-label-md text-label-md hover:bg-on-secondary-container transition-colors flex items-center gap-xs shadow-sm">
 <span class="material-symbols-outlined text-[18px]">download</span>
                     Export Video
                 </button>
@@ -247,17 +247,5 @@
 </div>
 </div>
 
-<div id="proto-nav" style="position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;background:#041525;color:#fff;padding:8px 14px;border-radius:9999px;font-family:Inter,sans-serif;font-size:12px;display:flex;gap:10px;flex-wrap:wrap;max-width:92vw;box-shadow:0 4px 16px rgba(0,0,0,0.25);">
-  <a href="index.html" style="color:#b7c8dd;text-decoration:none;">Landing</a>
-  <a href="sign-up.html" style="color:#b7c8dd;text-decoration:none;">Sign Up</a>
-  <a href="log-in.html" style="color:#b7c8dd;text-decoration:none;">Log In</a>
-  <a href="dashboard.html" style="color:#b7c8dd;text-decoration:none;">Dashboard</a>
-  <a href="script-input.html" style="color:#b7c8dd;text-decoration:none;">Script</a>
-  <a href="clip-gallery.html" style="color:#b7c8dd;text-decoration:none;">Clips</a>
-  <a href="timeline-assembly.html" style="color:#b7c8dd;text-decoration:none;">Timeline</a>
-  <a href="audio-upload.html" style="color:#b7c8dd;text-decoration:none;">Audio</a>
-  <a href="export-modal.html" style="color:#b7c8dd;text-decoration:none;">Export</a>
-  <a href="video-preview-modal.html" style="color:#b7c8dd;text-decoration:none;">Preview</a>
-</div>
 <script>requireAuth();</script>
 </body></html>
