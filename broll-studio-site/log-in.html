@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login - B-Roll Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "tertiary-container": "#38250d",
+                            "inverse-primary": "#b7c8dd",
+                            "on-secondary-container": "#005c70",
+                            "primary-container": "#1a2a3a",
+                            "tertiary-fixed": "#ffddb9",
+                            "inverse-surface": "#303032",
+                            "on-secondary-fixed-variant": "#004e5f",
+                            "surface-container-high": "#eae7e9",
+                            "on-tertiary-fixed": "#291803",
+                            "tertiary-fixed-dim": "#e2c19e",
+                            "secondary": "#00677d",
+                            "background": "#fbf9fa",
+                            "secondary-fixed-dim": "#4cd6fb",
+                            "surface-container-highest": "#e4e2e3",
+                            "on-background": "#1b1c1d",
+                            "secondary-container": "#50d9fe",
+                            "tertiary": "#211100",
+                            "primary-fixed": "#d3e4fa",
+                            "on-surface-variant": "#44474c",
+                            "surface-container-low": "#f5f3f4",
+                            "outline": "#74777d",
+                            "outline-variant": "#c4c6cc",
+                            "on-tertiary": "#ffffff",
+                            "error": "#ba1a1a",
+                            "surface-container": "#efedef",
+                            "surface-bright": "#fbf9fa",
+                            "surface": "#fbf9fa",
+                            "on-primary-fixed-variant": "#384859",
+                            "on-secondary-fixed": "#001f27",
+                            "on-primary-container": "#8191a5",
+                            "on-surface": "#1b1c1d",
+                            "on-error": "#ffffff",
+                            "inverse-on-surface": "#f2f0f1",
+                            "on-primary": "#ffffff",
+                            "secondary-fixed": "#b3ebff",
+                            "on-primary-fixed": "#0c1d2c",
+                            "on-tertiary-fixed-variant": "#594328",
+                            "error-container": "#ffdad6",
+                            "primary": "#041525",
+                            "surface-tint": "#506072",
+                            "surface-container-lowest": "#ffffff",
+                            "primary-fixed-dim": "#b7c8dd",
+                            "on-tertiary-container": "#a88b6b",
+                            "surface-variant": "#e4e2e3",
+                            "surface-dim": "#dbd9db",
+                            "on-secondary": "#ffffff",
+                            "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                    },
+                    "spacing": {
+                            "xs": "4px",
+                            "sm": "8px",
+                            "gutter": "16px",
+                            "xl": "32px",
+                            "lg": "24px",
+                            "margin": "24px",
+                            "md": "16px",
+                            "base": "8px"
+                    },
+                    "fontFamily": {
+                            "headline-xl-mobile": ["Inter"],
+                            "headline-xl": ["Inter"],
+                            "headline-lg": ["Inter"],
+                            "headline-md": ["Inter"],
+                            "body-lg": ["Inter"],
+                            "body-sm": ["Inter"],
+                            "label-sm": ["Inter"],
+                            "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                            "headline-xl-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                            "headline-xl": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                            "headline-lg": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                            "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                            "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                            "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                            "label-sm": ["12px", {"lineHeight": "1", "fontWeight": "500"}],
+                            "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .custom-shadow { box-shadow: 0 2px 12px rgba(26, 42, 58, 0.08); }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased flex flex-col min-h-screen">
+<!-- TopAppBar Suppressed as per Semantic Shell Mandate for Login/Transactional screens -->
+<main class="flex-grow flex flex-col md:flex-row min-h-screen">
+<!-- Left Side: Brand Visual -->
+<section class="hidden md:flex md:w-1/2 bg-primary-container text-on-primary p-xl flex-col justify-between relative overflow-hidden">
+<div class="relative z-10">
+<h1 class="font-headline-xl text-headline-xl text-on-primary mb-md">B-Roll Studio</h1>
+<p class="font-body-lg text-body-lg text-inverse-primary max-w-md">Welcome Back to the Studio. Your AI-powered creative workspace awaits.</p>
+</div>
+<div class="absolute inset-0 z-0 opacity-20" data-alt="A sophisticated abstract background for a digital creative studio. Deep blue and cyan tones dominate, with smooth, fluid geometric shapes overlapping subtly. Soft, high-quality lighting gives a sense of depth and professional workspace. Minimalist and corporate modern aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAq7NAndWqx_TOEsgor-cxJz3aw5bXmnSb6p0kK27-1e95TL5n-IK22gLnHMwO9g9UEzApPYUiPcbs-WEpcmSvoxFPSksZ1K_W_mEzzf83bImYlPK7gf4vlrTNbh09mPIiTFVMieSALAY44ncNNr0Ja9JJ8zJawya_hL_HpSsxMi7dhDxDFuLc2Q_AR5laa3_vvEXRu2e5GK3maLpkjDtFM2N8qkvwutXUFu_adBdzpa29ruyJXKRC5y1si2eUTbj6Ka8jygfPWvh0')"></div>
+<div class="relative z-10 flex items-center gap-md">
+<span class="material-symbols-outlined text-4xl" data-icon="videocam">videocam</span>
+<span class="material-symbols-outlined text-4xl" data-icon="auto_awesome">auto_awesome</span>
+<span class="material-symbols-outlined text-4xl" data-icon="dashboard">dashboard</span>
+</div>
+</section>
+<!-- Right Side: Login Form -->
+<section class="w-full md:w-1/2 flex items-center justify-center p-gutter md:p-xl bg-background relative z-10">
+<div class="w-full max-w-md bg-surface-container-lowest rounded-xl custom-shadow border border-surface-variant p-xl">
+<div class="md:hidden mb-lg text-center">
+<h1 class="font-headline-xl-mobile text-headline-xl-mobile text-primary mb-sm">B-Roll Studio</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Welcome Back to the Studio</p>
+</div>
+<div class="mb-lg hidden md:block">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-xs">Log In</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Access your creative workspace</p>
+</div>
+<form class="space-y-gutter" id="logInForm">
+<p id="formMessage" style="display:none;font-size:13px;"></p>
+<!-- Email -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="email">Email address</label>
+<input class="w-full rounded-lg border-outline-variant bg-surface-bright text-on-surface font-body-sm text-body-sm focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors py-sm px-md" id="email" name="email" placeholder="creator@example.com" required="" type="email"/>
+</div>
+<!-- Password -->
+<div>
+<div class="flex justify-between items-center mb-xs">
+<label class="block font-label-md text-label-md text-on-surface" for="password">Password</label>
+<a class="font-label-sm text-label-sm text-secondary hover:text-secondary-container transition-colors" href="#" id="forgotPasswordLink">Forgot password?</a>
+</div>
+<input class="w-full rounded-lg border-outline-variant bg-surface-bright text-on-surface font-body-sm text-body-sm focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors py-sm px-md" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+</div>
+<!-- Keep Logged In -->
+<div class="flex items-center">
+<input class="h-4 w-4 rounded border-outline-variant text-secondary focus:ring-secondary bg-surface-bright" id="remember" name="remember" type="checkbox"/>
+<label class="ml-sm block font-body-sm text-body-sm text-on-surface-variant" for="remember">
+                            Keep me logged in
+                        </label>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md rounded-lg py-md hover:opacity-90 active:opacity-80 transition-opacity flex justify-center items-center gap-sm" type="submit" id="logInSubmit">
+                        Log In
+                        <span class="material-symbols-outlined text-lg" data-icon="login">login</span>
+</button>
+</form>
+<script>
+  redirectIfSignedIn();
+
+  document.getElementById("logInForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const msgEl = document.getElementById("formMessage");
+    const btn = document.getElementById("logInSubmit");
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    btn.disabled = true;
+
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    btn.disabled = false;
+
+    if (error) {
+      showFormMessage(msgEl, error.message);
+      return;
+    }
+    window.location.href = "dashboard.html";
+  });
+
+  document.getElementById("forgotPasswordLink").addEventListener("click", async (e) => {
+    e.preventDefault();
+    const msgEl = document.getElementById("formMessage");
+    const email = document.getElementById("email").value.trim();
+    if (!email) {
+      showFormMessage(msgEl, "Enter your email above first, then click Forgot password?.");
+      return;
+    }
+    const { error } = await supabase.auth.resetPasswordForEmail(email);
+    if (error) {
+      showFormMessage(msgEl, error.message);
+    } else {
+      showFormMessage(msgEl, "Password reset email sent to " + email + ".", false);
+    }
+  });
+</script>
+<!-- Divider -->
+<div class="mt-lg mb-lg flex items-center">
+<div class="flex-grow border-t border-surface-variant"></div>
+<span class="flex-shrink-0 mx-md font-label-sm text-label-sm text-on-surface-variant">Or continue with</span>
+<div class="flex-grow border-t border-surface-variant"></div>
+</div>
+<!-- Social Logins -->
+<div class="grid grid-cols-2 gap-sm mb-lg">
+<button class="flex items-center justify-center gap-xs w-full bg-surface-bright border border-outline-variant rounded-lg py-sm px-md hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-lg text-on-surface-variant" data-icon="account_circle">account_circle</span>
+<span class="font-label-sm text-label-sm text-on-surface">Google</span>
+</button>
+<button class="flex items-center justify-center gap-xs w-full bg-surface-bright border border-outline-variant rounded-lg py-sm px-md hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-lg text-on-surface-variant" data-icon="devices">devices</span>
+<span class="font-label-sm text-label-sm text-on-surface">Apple</span>
+</button>
+</div>
+<!-- Sign Up Link -->
+<div class="text-center mt-xl">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                        Don't have an account? 
+                        <a class="font-label-md text-label-md text-secondary hover:underline transition-all" href="sign-up.html">Sign Up</a>
+</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-primary-container text-primary dark:text-on-primary-container font-body-sm text-body-sm w-full py-lg border-t border-outline-variant dark:border-on-primary-fixed-variant flat no shadows flex flex-col md:flex-row justify-between items-center px-margin w-full transition-all">
+<div class="mb-md md:mb-0">
+<span class="font-headline-md text-headline-md text-primary dark:text-on-primary">B-Roll Studio</span>
+</div>
+<div class="mb-md md:mb-0">
+<span>© 2024 B-Roll Studio. All rights reserved.</span>
+</div>
+<nav>
+<ul class="flex flex-wrap justify-center gap-md">
+<li><span class="text-on-surface-variant dark:text-on-primary-container hover:underline hover:text-secondary transition-all">Privacy Policy</span></li>
+<li><span class="text-on-surface-variant dark:text-on-primary-container hover:underline hover:text-secondary transition-all">Terms of Service</span></li>
+<li><span class="text-on-surface-variant dark:text-on-primary-container hover:underline hover:text-secondary transition-all">Security</span></li>
+<li><span class="text-on-surface-variant dark:text-on-primary-container hover:underline hover:text-secondary transition-all">Help Center</span></li>
+</ul>
+</nav>
+</footer>
+
+</body></html>

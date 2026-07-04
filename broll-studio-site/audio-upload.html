@@ -1,0 +1,207 @@
+<!DOCTYPE html><html lang="en" class="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
+<script id="tailwind-config">try{
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#4cd6fb",
+                        "tertiary-container": "#38250d",
+                        "on-secondary-fixed-variant": "#004e5f",
+                        "on-surface-variant": "#44474c",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e4e2e3",
+                        "surface-container-high": "#eae7e9",
+                        "secondary-container": "#50d9fe",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#303032",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#1a2a3a",
+                        "on-surface": "#1b1c1d",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#b7c8dd",
+                        "primary-fixed": "#d3e4fa",
+                        "primary": "#041525",
+                        "surface-container-low": "#f5f3f4",
+                        "on-primary-container": "#8191a5",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#b3ebff",
+                        "surface-tint": "#506072",
+                        "on-background": "#1b1c1d",
+                        "secondary": "#00677d",
+                        "surface-container": "#efedef",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#fbf9fa",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#291803",
+                        "inverse-on-surface": "#f2f0f1",
+                        "surface-bright": "#fbf9fa",
+                        "surface-container-highest": "#e4e2e3",
+                        "on-secondary-fixed": "#001f27",
+                        "background": "#fbf9fa",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#c4c6cc",
+                        "outline": "#74777d",
+                        "on-primary-fixed-variant": "#384859",
+                        "on-secondary-container": "#005c70",
+                        "on-tertiary-fixed-variant": "#594328",
+                        "tertiary-fixed": "#ffddb9",
+                        "on-tertiary-container": "#a88b6b",
+                        "surface-dim": "#dbd9db",
+                        "tertiary-fixed-dim": "#e2c19e",
+                        "inverse-primary": "#b7c8dd",
+                        "tertiary": "#211100",
+                        "on-primary-fixed": "#0c1d2c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "margin": "24px",
+                        "md": "16px",
+                        "base": "8px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-xl-mobile": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-xl-mobile": ["28px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "fontWeight": "500" }],
+                        "headline-xl": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    }catch(_e){}</script></head><body class="bg-surface text-on-surface min-h-screen flex flex-col font-body-lg">
+<header class="w-full flex items-center h-16 px-lg bg-surface border-b border-outline-variant sticky top-0 z-50">
+<button onclick="window.location.href='timeline-assembly.html'" class="flex items-center gap-sm text-on-surface-variant hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-secondary rounded-DEFAULT px-sm py-xs">
+<span class="material-symbols-outlined" data-icon="arrow_back" data-weight="fill" style="font-variation-settings: 'FILL' 1;" data-original-icon="arrow_back">arrow_back</span>
+<span class="font-label-md text-label-md">Back to Timeline</span>
+</button>
+<div class="flex-1 flex justify-center">
+<h1 class="font-headline-md text-headline-md text-primary">Upload Voiceover</h1>
+</div>
+<div class="w-32"></div>
+</header>
+<main class="flex-1 w-full max-w-4xl mx-auto p-lg md:p-xl flex flex-col gap-xl">
+<section class="w-full">
+<div id="dropzone" class="w-full h-64 border-2 border-dashed border-outline-variant rounded-xl bg-surface-container-lowest flex flex-col items-center justify-center p-xl transition-all duration-200 hover:border-secondary hover:bg-surface-container-low cursor-pointer group">
+<div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-on-secondary-container text-4xl" data-icon="mic" data-weight="fill" style="font-variation-settings: 'FILL' 1;">mic</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary mb-sm text-center">Drag &amp; drop your audio file here</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md text-center">Supports MP3, WAV, M4A up to 50MB</p>
+<button id="browseFilesBtn" class="bg-surface border border-outline-variant text-primary font-label-md text-label-md px-lg py-sm rounded-lg hover:bg-surface-container-low transition-colors shadow-sm">
+                    Browse Files
+                </button>
+<input type="file" id="fileInput" class="hidden" accept=".mp3,.wav,.m4a">
+<p id="uploadStatus" class="font-body-sm text-body-sm text-on-surface-variant mt-md text-center"></p>
+</div>
+</section>
+<section class="w-full bg-surface-container-lowest rounded-xl border border-outline-variant p-lg shadow-sm">
+<h3 class="font-headline-md text-headline-md text-primary mb-md">Audio Preview</h3>
+<div class="flex flex-col gap-md">
+<div class="w-full h-24 bg-surface-container-low rounded-lg border border-outline-variant relative overflow-hidden flex items-center justify-center">
+<div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: repeating-linear-gradient(90deg, transparent, transparent 2px, var(--tw-colors-secondary) 2px, var(--tw-colors-secondary) 4px);"></div>
+<span class="font-body-sm text-body-sm text-on-surface-variant relative z-10" id="waveformStatus">Waiting for audio...</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-sm" id="audioPlayerWrap"></div>
+</div>
+</div>
+</section>
+<section class="w-full bg-surface-container-lowest rounded-xl border border-outline-variant p-lg shadow-sm">
+<h3 class="font-headline-md text-headline-md text-primary mb-md">Alignment Options</h3>
+<div class="flex flex-col gap-lg">
+<label class="flex items-center justify-between cursor-pointer group p-sm -mx-sm rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary group-hover:text-secondary transition-colors">Auto-align with script</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Use AI to automatically sync audio timing with script text</span>
+</div>
+<div class="relative">
+<input type="checkbox" class="sr-only peer" checked="">
+</div></label></div></section></main>
+<script>
+(async () => {
+  const session = await requireAuth();
+  if (!session) return;
+  const userId = session.user.id;
+
+  const dropzone = document.getElementById("dropzone");
+  const fileInput = document.getElementById("fileInput");
+  const browseBtn = document.getElementById("browseFilesBtn");
+  const statusEl = document.getElementById("uploadStatus");
+  const waveformStatus = document.getElementById("waveformStatus");
+  const playerWrap = document.getElementById("audioPlayerWrap");
+
+  browseBtn.addEventListener("click", (e) => { e.stopPropagation(); fileInput.click(); });
+  dropzone.addEventListener("click", () => fileInput.click());
+  dropzone.addEventListener("dragover", (e) => { e.preventDefault(); dropzone.classList.add("border-secondary"); });
+  dropzone.addEventListener("dragleave", () => dropzone.classList.remove("border-secondary"));
+  dropzone.addEventListener("drop", (e) => {
+    e.preventDefault();
+    dropzone.classList.remove("border-secondary");
+    if (e.dataTransfer.files[0]) {
+      fileInput.files = e.dataTransfer.files;
+      handleUpload(e.dataTransfer.files[0]);
+    }
+  });
+  fileInput.addEventListener("change", () => {
+    if (fileInput.files[0]) handleUpload(fileInput.files[0]);
+  });
+
+  async function handleUpload(file) {
+    statusEl.textContent = "Uploading " + file.name + "...";
+    waveformStatus.textContent = "Uploading...";
+
+    const path = `${userId}/${Date.now()}-${file.name}`;
+    const { error: uploadError } = await supabase.storage.from("audio").upload(path, file);
+
+    if (uploadError) {
+      statusEl.textContent = "Upload failed: " + uploadError.message;
+      waveformStatus.textContent = "Upload failed";
+      return;
+    }
+
+    const trackType = file.name.toLowerCase().includes("music") ? "music" : "voiceover";
+    const { error: insertError } = await supabase.from("audio_tracks").insert({
+      user_id: userId,
+      storage_path: path,
+      title: file.name,
+      track_type: trackType
+    });
+
+    if (insertError) {
+      statusEl.textContent = "Saved file but failed to record it: " + insertError.message;
+      return;
+    }
+
+    const { data: signed } = await supabase.storage.from("audio").createSignedUrl(path, 3600);
+    waveformStatus.textContent = file.name;
+    playerWrap.innerHTML = `<audio controls src="${signed?.signedUrl || ''}" class="w-full"></audio>`;
+    statusEl.textContent = "Uploaded and saved!";
+  }
+})();
+</script>
+</body></html>

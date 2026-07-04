@@ -1,0 +1,467 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>B-Roll Studio - Clip Gallery</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary": "#ffffff",
+                      "on-secondary-fixed": "#001f27",
+                      "secondary-fixed": "#b3ebff",
+                      "surface-container-highest": "#e4e2e3",
+                      "on-surface": "#1b1c1d",
+                      "inverse-primary": "#b7c8dd",
+                      "surface-container": "#efedef",
+                      "secondary": "#00677d",
+                      "on-tertiary-container": "#a88b6b",
+                      "primary-fixed": "#d3e4fa",
+                      "on-tertiary-fixed-variant": "#594328",
+                      "on-primary-container": "#8191a5",
+                      "on-surface-variant": "#44474c",
+                      "surface-dim": "#dbd9db",
+                      "on-secondary": "#ffffff",
+                      "error": "#ba1a1a",
+                      "secondary-container": "#50d9fe",
+                      "surface-tint": "#506072",
+                      "surface-variant": "#e4e2e3",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-fixed": "#ffddb9",
+                      "inverse-on-surface": "#f2f0f1",
+                      "on-secondary-fixed-variant": "#004e5f",
+                      "tertiary": "#211100",
+                      "on-primary-fixed-variant": "#384859",
+                      "on-background": "#1b1c1d",
+                      "primary-container": "#1a2a3a",
+                      "surface-container-high": "#eae7e9",
+                      "tertiary-container": "#38250d",
+                      "primary-fixed-dim": "#b7c8dd",
+                      "background": "#fbf9fa",
+                      "on-error": "#ffffff",
+                      "primary": "#041525",
+                      "surface-bright": "#fbf9fa",
+                      "on-primary-fixed": "#0c1d2c",
+                      "surface-container-lowest": "#ffffff",
+                      "surface": "#fbf9fa",
+                      "outline-variant": "#c4c6cc",
+                      "on-secondary-container": "#005c70",
+                      "error-container": "#ffdad6",
+                      "on-error-container": "#93000a",
+                      "tertiary-fixed-dim": "#e2c19e",
+                      "outline": "#74777d",
+                      "surface-container-low": "#f5f3f4",
+                      "secondary-fixed-dim": "#4cd6fb",
+                      "inverse-surface": "#303032",
+                      "on-tertiary-fixed": "#291803"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "lg": "24px",
+                      "sm": "8px",
+                      "xl": "32px",
+                      "margin": "24px",
+                      "md": "16px",
+                      "base": "8px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Inter"],
+                      "headline-xl": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "headline-xl-mobile": ["Inter"]
+              },
+              "fontSize": {
+                      "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-xl": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-sm": ["12px", {"lineHeight": "1", "fontWeight": "500"}],
+                      "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                      "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-lg": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "headline-xl-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface h-screen overflow-hidden flex flex-col font-body-lg antialiased">
+<!-- TopNavBar -->
+<nav class="sticky top-0 w-full z-50 flex justify-between items-center px-lg h-16 bg-surface border-b border-outline-variant flex-shrink-0">
+<div class="flex items-center gap-xl">
+<span class="font-headline-lg text-headline-lg font-bold text-primary">B-Roll Studio</span>
+<div class="hidden md:flex items-center gap-lg font-body-lg text-body-lg">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="dashboard.html">Dashboard</a>
+<a class="text-secondary border-b-2 border-secondary pb-1 flex items-center h-16 transition-colors" href="clip-gallery.html">Gallery</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="timeline-assembly.html">Editor</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="audio-upload.html">Assets</a>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="hidden md:flex bg-surface-container rounded-full px-sm py-xs items-center border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] px-xs">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm w-48 text-on-surface placeholder:text-on-surface-variant" placeholder="Search..." type="text">
+</div>
+<button class="text-on-surface-variant hover:bg-surface-container-highest p-sm rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-highest p-sm rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-md py-sm rounded-lg hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors">New Project</button>
+<img alt="User profile" class="w-8 h-8 rounded-full border border-outline-variant ml-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeembFT2izSNL0IQQzp1NndFEt3kBXOdWgvUPv_sNqgHINTIfGAVR8FGdIZCt4mx3K3tSin0Xre7UBEe4fNVWqzhH3Vngd0A2aHxsclNW8Vl0JLgIzCbaijF6ddyk02DDiqg3o9zIam_jWDa-F3Ewvrf8oVNkWOMvGFc5KmpI_jocPIG68iIfjiC8H-h2qPdCpE-rUd-crVdLGY1aKKOr0_rqZLKev23CQ1d9jmyiASzKJkUBRBxcwKWv7Z0L0Ric0gG8qvw-qkAw">
+</div>
+</nav>
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col fixed left-0 top-16 h-[calc(100vh-64px)] w-72 p-md z-40 bg-surface-container-low border-r border-outline-variant flex-shrink-0">
+<div class="mb-xl px-sm">
+<div class="flex items-center gap-sm mb-xs">
+<div class="w-8 h-8 bg-primary rounded flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[18px]">movie</span>
+</div>
+<div>
+<h2 class="font-label-md text-label-md text-on-surface">Current Project</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate w-48">Vlog #42 - Edited</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-xs font-label-md text-label-md text-on-surface-variant">
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors" href="dashboard.html">
+<span class="material-symbols-outlined" data-icon="folder">folder</span>
+                    All Projects
+                </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors" href="script-input.html">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+                    New Script
+                </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors" href="timeline-assembly.html">
+<span class="material-symbols-outlined" data-icon="movie_edit">movie_edit</span>
+                    Timeline Editor
+                </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors" href="audio-upload.html">
+<span class="material-symbols-outlined" data-icon="graphic_eq">graphic_eq</span>
+                    Audio
+                </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg bg-secondary-container text-on-secondary-container font-bold transition-all" href="clip-gallery.html">
+<span class="material-symbols-outlined" data-icon="video_library">video_library</span>
+                    Library
+                </a>
+</nav>
+<div class="mt-auto flex flex-col gap-sm pt-lg border-t border-outline-variant">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#" onclick="signOut(); return false;">
+<span class="material-symbols-outlined text-[18px]" data-icon="logout">logout</span>
+                    Log Out
+                </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-72 flex flex-col h-full bg-surface overflow-hidden relative">
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-lg md:p-xl flex flex-col gap-xl pb-32">
+<!-- Inner Header -->
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-md border-b border-outline-variant pb-md">
+<div>
+<h1 class="font-headline-xl text-headline-xl text-primary mb-xs">Nature Vlog #42</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Clip Generation Gallery</p>
+</div>
+<div class="bg-surface-container border border-outline-variant rounded-full px-md py-sm inline-flex items-center gap-sm self-start md:self-auto shadow-sm">
+<span class="material-symbols-outlined text-secondary text-[18px]">segment</span>
+<span class="font-label-md text-label-md text-on-surface">Segment 1 of 5</span>
+<button class="ml-sm text-on-surface-variant hover:text-primary transition-colors flex items-center">
+<span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+</div>
+</header>
+<!-- Top Section: Script Text -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-[0_2px_12px_rgba(26,42,58,0.04)] relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-secondary"></div>
+<div class="flex items-center gap-sm mb-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">format_quote</span>
+<h3 class="font-label-md text-label-md uppercase tracking-wider text-xs">Current Script Segment</h3>
+</div>
+<p class="font-headline-md text-headline-md text-on-surface leading-relaxed max-w-4xl">
+                        "The dense canopy of the <span class="bg-secondary-fixed text-on-secondary-fixed px-xs rounded cursor-pointer hover:bg-secondary-fixed-dim transition-colors">Amazon rainforest</span> is home to an incredible array of wildlife. From the vibrant plumage of <span class="bg-secondary-fixed text-on-secondary-fixed px-xs rounded cursor-pointer hover:bg-secondary-fixed-dim transition-colors">macaws</span> soaring overhead, to the silent predators moving through the undergrowth, every layer vibrates with life."
+                    </p>
+<div class="mt-md flex gap-sm">
+<div class="inline-flex items-center gap-xs bg-surface-container-highest px-sm py-xs rounded-full font-label-sm text-label-sm text-on-surface-variant border border-outline-variant">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+                            AI Keywords extracted
+                        </div>
+</div>
+</section>
+<!-- Main Section: Clip Grid -->
+<section>
+<div class="flex justify-between items-center mb-md">
+<div class="flex gap-sm">
+<button id="tabMyClips" class="font-headline-md text-headline-md text-primary border-b-2 border-secondary pb-1">Your Clips</button>
+<button id="tabStock" class="font-headline-md text-headline-md text-on-surface-variant hover:text-primary pb-1">Search Stock (Pexels)</button>
+</div>
+<div class="flex gap-sm items-center">
+<span id="uploadStatus" class="font-label-sm text-label-sm text-on-surface-variant"></span>
+<input type="file" id="clipFileInput" class="hidden" accept="video/*" />
+<button id="uploadClipBtn" class="bg-secondary text-on-secondary font-label-md text-label-md px-md py-sm rounded-lg hover:bg-secondary/90 transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">upload</span>
+                        Upload Clip
+                    </button>
+</div>
+</div>
+<div id="stockSearchBar" class="mb-md" style="display:none;">
+<div class="flex gap-sm">
+<input id="stockQueryInput" type="text" placeholder="Search Pexels, e.g. 'forest sunrise'" class="flex-1 bg-surface-container-low border border-outline-variant rounded-lg px-md py-sm font-body-lg text-on-surface focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-all" />
+<button id="stockSearchBtn" class="bg-primary text-on-primary font-label-md text-label-md px-lg py-sm rounded-lg hover:bg-primary/90 transition-colors">Search</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-md" id="clipGrid">
+<p class="text-on-surface-variant font-body-sm text-body-sm">Loading clips...</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-md" id="stockGrid" style="display:none;"></div>
+</section>
+</div>
+<!-- Bottom Floating Action Bar -->
+<div class="absolute bottom-0 left-0 w-full border-t border-outline-variant bg-surface/80 backdrop-blur-md px-xl py-md flex justify-between items-center z-20 shadow-[0_-4px_20px_rgba(26,42,58,0.05)]">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 bg-secondary-container rounded-full flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[20px]">movie_filter</span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-bold block">3 clips selected</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">Total duration: 00:44</span>
+</div>
+</div>
+<button class="bg-secondary text-on-secondary font-label-md text-label-md px-xl py-3 rounded-lg hover:bg-secondary-container hover:text-on-secondary-container transition-colors flex items-center gap-sm shadow-md hover:shadow-lg">
+                    Continue to Timeline Assembly
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</main>
+</div>
+
+<script>
+(async () => {
+  const session = await requireAuth();
+  if (!session) return;
+  const userId = session.user.id;
+
+  const grid = document.getElementById("clipGrid");
+  const fileInput = document.getElementById("clipFileInput");
+  const uploadBtn = document.getElementById("uploadClipBtn");
+  const statusEl = document.getElementById("uploadStatus");
+
+  async function loadClips() {
+    const { data: clips, error } = await supabase
+      .from("clips")
+      .select("id, storage_path, external_url, attribution, attribution_url, title, source, created_at")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      grid.innerHTML = '<p class="text-on-surface-variant font-body-sm text-body-sm">Could not load clips: ' + error.message + '</p>';
+      return;
+    }
+    if (!clips || clips.length === 0) {
+      grid.innerHTML = '<p class="text-on-surface-variant font-body-sm text-body-sm">No clips yet. Upload a clip or search stock footage to get started.</p>';
+      return;
+    }
+
+    // Get a temporary signed URL for uploaded clips (bucket is private); stock clips already have a public URL.
+    const cards = await Promise.all(clips.map(async (c) => {
+      let videoUrl = c.external_url || "";
+      if (!videoUrl && c.storage_path) {
+        const { data: signed } = await supabase.storage.from("clips").createSignedUrl(c.storage_path, 3600);
+        videoUrl = signed?.signedUrl || "";
+      }
+      const attributionLine = c.source === "stock" && c.attribution
+        ? `<span class="font-label-sm text-label-sm text-on-surface-variant">Pexels: <a href="${c.attribution_url}" target="_blank" class="underline">${c.attribution}</a></span>`
+        : `<span class="font-label-sm text-label-sm text-on-surface-variant capitalize">${c.source.replace("_", " ")}</span>`;
+      return `
+        <article class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden flex flex-col group hover:shadow-[0_4px_20px_rgba(26,42,58,0.08)] hover:border-outline transition-all duration-300">
+          <div class="w-full aspect-video relative bg-surface-variant overflow-hidden">
+            <video class="w-full h-full object-cover" src="${videoUrl}" muted controls preload="metadata"></video>
+          </div>
+          <div class="p-md flex flex-col gap-xs">
+            <h4 class="font-label-md text-label-md text-on-surface truncate">${c.title || "Untitled clip"}</h4>
+            ${attributionLine}
+          </div>
+        </article>`;
+    }));
+
+    grid.innerHTML = cards.join("");
+  }
+
+  uploadBtn.addEventListener("click", () => fileInput.click());
+
+  fileInput.addEventListener("change", async () => {
+    const file = fileInput.files[0];
+    if (!file) return;
+
+    statusEl.textContent = "Uploading...";
+    uploadBtn.disabled = true;
+
+    const path = `${userId}/${Date.now()}-${file.name}`;
+    const { error: uploadError } = await supabase.storage.from("clips").upload(path, file);
+
+    if (uploadError) {
+      statusEl.textContent = "Upload failed: " + uploadError.message;
+      uploadBtn.disabled = false;
+      return;
+    }
+
+    const { error: insertError } = await supabase.from("clips").insert({
+      user_id: userId,
+      storage_path: path,
+      title: file.name,
+      source: "upload"
+    });
+
+    uploadBtn.disabled = false;
+    fileInput.value = "";
+
+    if (insertError) {
+      statusEl.textContent = "Saved file but failed to record it: " + insertError.message;
+      return;
+    }
+
+    statusEl.textContent = "Uploaded!";
+    setTimeout(() => statusEl.textContent = "", 2000);
+    loadClips();
+  });
+
+  loadClips();
+
+  // ---- Stock (Pexels) search ----
+  const tabMyClips = document.getElementById("tabMyClips");
+  const tabStock = document.getElementById("tabStock");
+  const stockSearchBar = document.getElementById("stockSearchBar");
+  const stockGrid = document.getElementById("stockGrid");
+  const stockQueryInput = document.getElementById("stockQueryInput");
+  const stockSearchBtn = document.getElementById("stockSearchBtn");
+
+  function showMyClipsTab() {
+    tabMyClips.classList.add("text-primary", "border-b-2", "border-secondary");
+    tabMyClips.classList.remove("text-on-surface-variant");
+    tabStock.classList.remove("text-primary", "border-b-2", "border-secondary");
+    tabStock.classList.add("text-on-surface-variant");
+    grid.style.display = "grid";
+    stockGrid.style.display = "none";
+    stockSearchBar.style.display = "none";
+    uploadClipBtnVisibility(true);
+  }
+  function showStockTab() {
+    tabStock.classList.add("text-primary", "border-b-2", "border-secondary");
+    tabStock.classList.remove("text-on-surface-variant");
+    tabMyClips.classList.remove("text-primary", "border-b-2", "border-secondary");
+    tabMyClips.classList.add("text-on-surface-variant");
+    grid.style.display = "none";
+    stockGrid.style.display = "grid";
+    stockSearchBar.style.display = "block";
+    uploadClipBtnVisibility(false);
+  }
+  function uploadClipBtnVisibility(show) {
+    uploadBtn.style.display = show ? "flex" : "none";
+  }
+
+  tabMyClips.addEventListener("click", showMyClipsTab);
+  tabStock.addEventListener("click", showStockTab);
+
+  async function searchPexels(query) {
+    stockGrid.innerHTML = '<p class="text-on-surface-variant font-body-sm text-body-sm">Searching Pexels...</p>';
+    const { data: { session: currentSession } } = await supabase.auth.getSession();
+
+    const res = await fetch("https://jctjfwoihtygvlhqmifs.supabase.co/functions/v1/search-pexels", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + currentSession.access_token
+      },
+      body: JSON.stringify({ query, type: "videos", per_page: 12 })
+    });
+
+    const data = await res.json();
+    if (!res.ok || data.error) {
+      stockGrid.innerHTML = '<p class="font-body-sm text-body-sm" style="color:#ba1a1a;">' + (data.error || "Search failed") + '</p>';
+      return;
+    }
+
+    const results = data.results || [];
+    if (results.length === 0) {
+      stockGrid.innerHTML = '<p class="text-on-surface-variant font-body-sm text-body-sm">No results. Try a different search.</p>';
+      return;
+    }
+
+    stockGrid.innerHTML = results.map(r => `
+      <article class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden flex flex-col group hover:shadow-[0_4px_20px_rgba(26,42,58,0.08)] hover:border-outline transition-all duration-300">
+        <div class="w-full aspect-video relative bg-surface-variant overflow-hidden">
+          <img class="w-full h-full object-cover" src="${r.preview_url}" alt="" />
+        </div>
+        <div class="p-md flex flex-col gap-xs">
+          <span class="font-label-sm text-label-sm text-on-surface-variant">Photo/video by <a href="${r.photographer_url}" target="_blank" class="underline">${r.photographer}</a> on Pexels</span>
+          <button class="add-stock-clip bg-secondary text-on-secondary font-label-sm text-label-sm py-2 rounded-lg mt-xs" data-id="${r.id}" data-url="${r.full_url}" data-photographer="${r.photographer}" data-pexels-url="${r.pexels_url}">
+            Add to my clips
+          </button>
+        </div>
+      </article>
+    `).join("");
+
+    stockGrid.querySelectorAll(".add-stock-clip").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        btn.disabled = true;
+        btn.textContent = "Adding...";
+        const { error } = await supabase.from("clips").insert({
+          user_id: userId,
+          external_url: btn.dataset.url,
+          title: "Pexels clip " + btn.dataset.id,
+          source: "stock",
+          attribution: btn.dataset.photographer,
+          attribution_url: btn.dataset.pexelsUrl
+        });
+        if (error) {
+          btn.textContent = "Failed";
+          return;
+        }
+        btn.textContent = "Added ✓";
+      });
+    });
+  }
+
+  stockSearchBtn.addEventListener("click", () => {
+    const q = stockQueryInput.value.trim();
+    if (q) searchPexels(q);
+  });
+  stockQueryInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") stockSearchBtn.click();
+  });
+
+  // If arriving from script-input.html with a suggested query, jump straight into the stock tab.
+  const urlParams = new URLSearchParams(window.location.search);
+  const stockQuery = urlParams.get("stock_query");
+  if (stockQuery) {
+    showStockTab();
+    stockQueryInput.value = stockQuery;
+    searchPexels(stockQuery);
+  }
+})();
+</script>
+</body></html>
